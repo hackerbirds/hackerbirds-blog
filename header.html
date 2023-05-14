@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>hackerbirds</title>
+	<style>
+		@font-face {
+            font-family: Monaco;
+            src: url(monaco.ttf);
+        }
+		:root {
+			--highlight-color: #a0ab9f; 
+			--text-color-dark: #130d0c;
+			--text-color: #281c19;
+			--text-color-lighter: #483c39;
+			--fronter-background: #d7d4ce;
+			--background: rgb(241, 236, 230);
+			--font: Monaco, 'Courier New', monospace;
+		}
+		html {
+            border: 50px solid var(--fronter-background);
+            border-radius: 5 5 5 5;
+            position: relative;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            overflow: auto;
+        }
+		body {
+			font-family: var(--font);
+			font-size: 1rem;
+			line-height: 1.6;
+			max-width: 750px;
+			color: var(--text-color);
+			background-color: var(--background);
+
+			margin: 1rem auto;
+			padding: 1rem;
+		}
+		@media (min-width: 768px) {
+			body {
+				font-size: 1.1rem;
+				padding: 2rem;
+			}
+		}
+		h1, h2, h3, ul, ol, li, p, blockquote, pre, a {
+			font-family: inherit;
+			font-size: inherit;
+			margin: 0;
+		}
+		h1, h2, h3 { font-weight: bold; }
+		h1:before, h2:before, h3:before {
+			color: var(--highlight-color);
+			display: inline-block;
+			margin-right: 1ch;
+		}
+		h1:before { content: ''; }
+		h2:before { content: '❊'; }
+		h3:before { content: '❊❊'; }
+		h1 { font-size: 1.7rem; }
+		h2 { font-size: 1.4rem; color: var(--text-color-lighter); }
+		h3 { font-size: 1.2rem; color: var(--text-color-lighter); }
+		ul {
+			list-style: none;
+			padding-left: 0;
+		}
+		ul li {
+			position: relative;
+			padding-left: 3ch;
+		}
+		ul li:before {
+			content: '＊';
+			font-weight: bold;
+			color: var(--highlight-color);
+			position: absolute;
+			left: 0;
+			font-family: inherit;
+			font-size: inherit;
+		}
+		a {
+			text-decoration: underline;
+			color: var(--highlight-color);
+			display: inline-block;
+			line-break: anywhere;
+			-x-webkit-line-break: anywhere;
+			padding-left: 0.5ch;
+			padding-right: 0.5ch;
+			margin: 0.5ch 0.5ch;
+			margin-left: 1rem 0;
+			position: relative;
+			box-sizing: border-box;
+		}
+		a:hover {
+			background-color: var(--highlight-color);
+			color: white;
+			text-decoration: none;
+		}
+		main a:before {
+			content: "~>";
+			display: inline-block;
+			position: absolute;
+			left: 0.5ch;
+		}
+		main a {
+			padding-left: 3.5ch;
+		}
+		main img {
+			display: block;
+			max-width: 100%;
+			margin: 1rem auto;
+		}
+		pre {
+			padding: 1ch;
+			background-color: var(--fronter-background);
+			color: var(--text-color-dark);
+			line-height: 1.1;
+			font-family: monospace;
+			overflow-x: auto;
+		}
+        code {
+            font-family: "Courier New", Courier, monospace;
+            background-color: var(--fronter-background);
+        }
+		blockquote {
+			padding: 0.25rem;
+			background-color: var(--fronter-background);
+			position: relative;
+			border-left: 4px solid var(--highlight-color);
+			margin: 0.25rem 0;
+		}
+		blockquote p {
+			margin: 0.5rem;
+			margin-left: 0.75rem;
+		}
+		footer {
+			padding-top: 3ch;
+			border-top: 1px dotted var(--text-color-lighter);
+			color: var(--text-color);
+			font-size: 0.9rem;
+			text-align: center;
+		}
+		footer * {
+			margin: auto;
+		}
+		.title {
+            font-size: 3rem;
+            font-family: var(--font);
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            text-align: center;
+            overflow: scroll;
+            color: var(--text-color);
+            text-shadow:
+                -2px -2px 0 var(--highlight-color),
+                0   -1px 0 var(--highlight-color),
+                1px -1px 0 var(--highlight-color),
+                1px  0   0 var(--highlight-color),
+                1px  1px 0 var(--fronter-background),
+                0    1px 0 var(--fronter-background),
+                -1px  1px 0 var(--fronter-background),
+                -1px  0   0 var(--fronter-background);
+        }
+	</style>
+</head>
+<body>
+	<p class="title"><a href="../" style="text-decoration: none;">hackerbirds</a></p>
+	<main>
