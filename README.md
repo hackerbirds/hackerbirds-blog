@@ -1,6 +1,6 @@
 # Shitty blog page maker
 
-Write blog posts quickly using this little script. It is based on Lichen, and is backwards compatible with Gemtext, with the added bonus of:
+Write blog posts quickly using this little script. It is based on [Lichen](https://lichen.sensorstation.co/), and is backwards compatible with Gemtext, with the added bonus of:
 - `inline code blocks` in the middle of your text
 - *bold* text
 - __italic__ text
