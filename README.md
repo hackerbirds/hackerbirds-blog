@@ -5,7 +5,7 @@ Write blog posts quickly using this little script. It is based on [Lichen](https
 - *bold* text
 - __italic__ text
 
-Write in `post.md` like we just did, then run `python3 build.py`, and the resulting `index.html` is your pretty website
+Write in `post.txt` like we just did, then run `python3 build.py`, and the resulting `index.html` is your pretty website
 
 ## Disclaimers
 
