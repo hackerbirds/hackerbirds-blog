@@ -38,6 +38,69 @@ def parse(line):
     if escaped_line == "\n":
         return "<br>"
     else:
+        # This is for inline code blocks
+        if '`' in escaped_line:
+            split_code_line = escaped_line.split("`")
+            if len(split_code_line) % 2 == 0:
+                # Means there's an odd amount of '`` which shouldn't happen
+                raise Exception("Code tag weirdly formatted at line \""+line+"\". Are you sure there is the right amount of '`' in your line?")
+
+            open_tag = True
+            # For loop for all the `
+            for thing in split_code_line:
+                # Actually the loop goes one extra round so
+                # we need this if condition for when there are no more `
+                if '`' not in escaped_line:
+                    break
+                code_tick_index = escaped_line.index('`')
+                if open_tag is True:
+                    escaped_line = escaped_line[:code_tick_index] + "<code>" + escaped_line[code_tick_index+1:]
+                    open_tag = False
+                else: 
+                    escaped_line = escaped_line[:code_tick_index] + "</code>" + escaped_line[code_tick_index+1:]
+                    open_tag = True
+
+        # Inline italic text
+        if '__' in escaped_line:
+            split_code_line = escaped_line.split("__")
+            if len(split_code_line) % 2 == 0:
+                raise Exception("Italics formatted at line \""+line+"\". Are you sure there is the right amount of '__' in your line?")
+
+            open_tag = True
+            # For loop for all the `
+            for thing in split_code_line:
+                # Actually the loop goes one extra round so
+                # we need this if condition for when there are no more `
+                if '__' not in escaped_line:
+                    break
+                code_tick_index = escaped_line.index('__')
+                if open_tag is True:
+                    escaped_line = escaped_line[:code_tick_index] + "<i>" + escaped_line[code_tick_index+2:]
+                    open_tag = False
+                else: 
+                    escaped_line = escaped_line[:code_tick_index] + "</i>" + escaped_line[code_tick_index+2:]
+                    open_tag = True
+        # Inline bold text
+        if '*' in escaped_line:
+            split_code_line = escaped_line.split("*")
+            if len(split_code_line) % 2 == 0:
+                raise Exception("Bold formatted at line \""+line+"\". Are you sure there is the right amount of '*' in your line?")
+
+            open_tag = True
+            # For loop for all the `
+            for thing in split_code_line:
+                # Actually the loop goes one extra round so
+                # we need this if condition for when there are no more `
+                if '*' not in escaped_line:
+                    break
+                code_tick_index = escaped_line.index('*')
+                if open_tag is True:
+                    escaped_line = escaped_line[:code_tick_index] + "<b>" + escaped_line[code_tick_index+1:]
+                    open_tag = False
+                else: 
+                    escaped_line = escaped_line[:code_tick_index] + "</b>" + escaped_line[code_tick_index+1:]
+                    open_tag = True
+                    
         # Headers: id is used to scroll
         if escaped_line.startswith("# "):
             text = escaped_line.rstrip()[2:]
@@ -48,6 +111,9 @@ def parse(line):
         elif escaped_line.startswith("### "):
             text = escaped_line.rstrip()[4:]
             html = "<h3 id=\""+text.replace(" ", "-")+"\">"+text+"</h3>"
+        elif escaped_line.startswith("% "):
+            text = escaped_line.rstrip()[2:]
+            html = "<div class=\"fronter\">"+text+"</div>"
         # Link/URL (" => ")
         elif escaped_line.startswith("=&gt; "):
             split_line = escaped_line.rstrip().split(" ")
@@ -64,69 +130,6 @@ def parse(line):
         elif escaped_line.startswith("&gt; ") and not escaped_line.startswith("=&gt; "):
             html = "<blockquote><p>"+escaped_line.rstrip()[4:]+"</p></blockquote>"
         else:
-            # This is for inline code blocks
-            if '`' in escaped_line:
-                split_code_line = escaped_line.split("`")
-                if len(split_code_line) % 2 == 0:
-                    # Means there's an odd amount of '`` which shouldn't happen
-                    raise Exception("Code tag weirdly formatted at line \""+line+"\". Are you sure there is the right amount of '`' in your line?")
-
-                open_tag = True
-                # For loop for all the `
-                for thing in split_code_line:
-                    # Actually the loop goes one extra round so
-                    # we need this if condition for when there are no more `
-                    if '`' not in escaped_line:
-                        break
-                    code_tick_index = escaped_line.index('`')
-                    if open_tag is True:
-                        escaped_line = escaped_line[:code_tick_index] + "<code>" + escaped_line[code_tick_index+1:]
-                        open_tag = False
-                    else: 
-                        escaped_line = escaped_line[:code_tick_index] + "</code>" + escaped_line[code_tick_index+1:]
-                        open_tag = True
-
-            # Inline italic text
-            if '__' in escaped_line:
-                split_code_line = escaped_line.split("__")
-                if len(split_code_line) % 2 == 0:
-                    raise Exception("Italics formatted at line \""+line+"\". Are you sure there is the right amount of '__' in your line?")
-
-                open_tag = True
-                # For loop for all the `
-                for thing in split_code_line:
-                    # Actually the loop goes one extra round so
-                    # we need this if condition for when there are no more `
-                    if '__' not in escaped_line:
-                        break
-                    code_tick_index = escaped_line.index('__')
-                    if open_tag is True:
-                        escaped_line = escaped_line[:code_tick_index] + "<i>" + escaped_line[code_tick_index+2:]
-                        open_tag = False
-                    else: 
-                        escaped_line = escaped_line[:code_tick_index] + "</i>" + escaped_line[code_tick_index+2:]
-                        open_tag = True
-            # Inline bold text
-            if '*' in escaped_line:
-                split_code_line = escaped_line.split("*")
-                if len(split_code_line) % 2 == 0:
-                    raise Exception("Bold formatted at line \""+line+"\". Are you sure there is the right amount of '*' in your line?")
-
-                open_tag = True
-                # For loop for all the `
-                for thing in split_code_line:
-                    # Actually the loop goes one extra round so
-                    # we need this if condition for when there are no more `
-                    if '*' not in escaped_line:
-                        break
-                    code_tick_index = escaped_line.index('*')
-                    if open_tag is True:
-                        escaped_line = escaped_line[:code_tick_index] + "<b>" + escaped_line[code_tick_index+1:]
-                        open_tag = False
-                    else: 
-                        escaped_line = escaped_line[:code_tick_index] + "</b>" + escaped_line[code_tick_index+1:]
-                        open_tag = True
-
             html = "<p>"+escaped_line.rstrip()+"</p>"
     return html
 
