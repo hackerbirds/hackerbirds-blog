@@ -81,7 +81,7 @@ def parse(line):
                     escaped_line = escaped_line[:code_tick_index] + "</i>" + escaped_line[code_tick_index+2:]
                     open_tag = True
         # Inline bold text
-        if '*' in escaped_line:
+        if ('*' in escaped_line and escaped_line[0] != '*'):
             split_code_line = escaped_line.split("*")
             if len(split_code_line) % 2 == 0:
                 raise Exception("Bold formatted at line \""+line+"\". Are you sure there is the right amount of '*' in your line?")
