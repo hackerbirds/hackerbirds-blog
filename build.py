@@ -129,6 +129,9 @@ def parse(line):
         # Blockquote (" > ")
         elif escaped_line.startswith("&gt; ") and not escaped_line.startswith("=&gt; "):
             html = "<blockquote><p>"+escaped_line.rstrip()[4:]+"</p></blockquote>"
+        # Bar line
+        elif escaped_line == "---\n":
+            html = "<hr>"
         else:
             html = "<p>"+escaped_line.rstrip()+"</p>"
     return html
