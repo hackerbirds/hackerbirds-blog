@@ -7,6 +7,10 @@ Write blog posts quickly using this little script. It is based on [Lichen](https
 
 Write in `post.txt` like we just did, then run `python3 build.py`, and the resulting `index.html` is your pretty website
 
+## What? Why?
+
+https://hackerbirds.neocities.org/Slightly-Less-Worse-HTML/
+
 ## Disclaimers
 
 ### This is not a fully-automated script
@@ -15,6 +19,4 @@ You are meant to manually modify the code and resulting HTML to your liking if n
 
 ### You are all alone in this adventure
 
-We will not maintain this project, it was created for our own personal use. That said, if you think you can use it or modify it for yourself, go ahead.
-
-=> https://hackerbirds.neocities.org While you're at it, check out our little blog posts
+We will not maintain or modify this project for anyone else but us. That said, if you think you can use it or modify it for yourself, go ahead.
