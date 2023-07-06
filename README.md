@@ -7,6 +7,10 @@ Write blog posts quickly using this little script. It is based on [Lichen](https
 
 Write in `post.txt` like we just did, then run `python3 build.py`, and the resulting `index.html` is your pretty website
 
+#### *Ok, what else?*
+- Quick horizontal bar breaks with "----" at the start of a new line
+- Cool looking blocks with "% [text you want]" at the start of a new line
+
 ## What? Why?
 
 https://hackerbirds.neocities.org/Slightly-Less-Worse-HTML/
