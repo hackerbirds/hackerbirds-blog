@@ -125,7 +125,7 @@ def parse(line):
             html = "<a href=\""+url+"\">"+text+"</a>"
         # List element
         elif escaped_line.startswith("* "):
-            html = "<li>"+parse(escaped_line.rstrip()[2:])+"</li>"
+            html = "<li>"+parse(line.rstrip()[2:])+"</li>"
         # Blockquote (" > ")
         elif escaped_line.startswith("&gt; ") and not escaped_line.startswith("=&gt; "):
             html = "<blockquote><p>"+escaped_line.rstrip()[4:]+"</p></blockquote>"
