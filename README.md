@@ -49,8 +49,8 @@ HORIZONTAL BAR BREAK:
 
 ## What? Why?
 
-https://hackerbirds.neocities.org/Slightly-Less-Worse-HTML/
-https://hackerbirds.neocities.org/new-redesign/
+* https://hackerbirds.neocities.org/Slightly-Less-Worse-HTML/
+* https://hackerbirds.neocities.org/new-redesign/
 
 ## Disclaimers
 
