@@ -206,17 +206,28 @@ ul li:before {
     font-size: inherit;
 }
 
+main a:before {
+    content: "~>";
+    left: -1ch;
+    position: relative;
+    display: inline-block;
+}
+
 main a:hover {
     background-color: var(--highlight-color);
     color: var(--text-color-dark);
+    padding: 2px;
+    padding-left: 2ch;
+    padding-right: 1ch;
     text-decoration: none;
 }
 
-main a:before {
-    content: "~>";
-    display: inline-block;
-    position: absolute;
-    left: 0.5ch;
+.reader main a:hover {
+    background-color: var(--background);
+    border: 2px dashed var(--text-color);
+    border-radius: 8px;
+    color: var(--text-color-dark);
+    text-decoration: none;
 }
 
 a {
@@ -225,6 +236,10 @@ a {
     display: inline-block;
     line-break: anywhere;
     -x-webkit-line-break: anywhere;
+}
+
+main a {
+    margin-left: 2ch;
 }
 
 main img {
@@ -385,7 +400,7 @@ h1:after {
 }
 
 .attachment-div img {
-    flex-grow: 1;
+    flex-grow: 1; 
 }
 
 /* a hacky animation for the blink; since the bird is
@@ -455,9 +470,9 @@ h1:after {
     }
 
     .fronter img {
-        width: 0;
-        height: 0;
-        padding: 0;
+        max-width: 40px;
+        margin: 10px;
+        padding: 4px;
     }
 
     .banner {
