@@ -1,15 +1,51 @@
-# Shitty blog page maker
+# Hackerbirds's static blog page builder
 
-Write blog posts quickly using this little script. It is based on [Lichen](https://lichen.sensorstation.co/), and is backwards compatible with Gemtext, with the added bonus of:
-- `inline code blocks` in the middle of your text
-- *bold* text
-- __italic__ text
+Write blog posts quickly using this little script. Originally based on [Lichen](https://lichen.sensorstation.co/), it is backwards compatible with Gemtext.
 
 Write in `post.txt` like we just did, then run `python3 build.py`, and the resulting `index.html` is your pretty website
 
-#### *Ok, what else?*
-- Quick horizontal bar breaks with "----" at the start of a new line
-- Cool looking blocks with "% [text you want]" at the start of a new line
+#### Features
+````
+1) Each new line in post.txt is a new line in the HTML.
+
+FORMATTING:
+ *bold text*
+ __italic text__
+
+HEADERS:
+# Title
+## Big header
+### Smaller header
+
+CODE BLOCKS:
+You can add `inline code with single quotes` in the middle of your text...
+
+```
+Or full code blocks.
+```
+
+UNORDERED LISTS:
+* Make a list
+* Like this
+* Add a star for each element in the list
+
+IMAGES:
+-> images/sourceimg.png | You can add alt text too | And some text to show up under the image too
+
+BLOCK QUOTE:
+> Very important quote.
+
+URL / LINKS:
+=> https://zombo.com You can do anything at Zombo.com
+
+HACKERBIRDS'S "FRONTER" QUOTE BLOCK:
+% If you do this, a little bird will show up next to your gorgeous text.
+
+HORIZONTAL BAR BREAK:
+---
+(this creates a line to separate your text)
+
+````
 
 ## What? Why?
 
