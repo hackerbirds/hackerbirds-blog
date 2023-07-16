@@ -301,6 +301,10 @@ h1:after {
     padding: 15px;
 }
 
+.fronter p {
+    flex-grow: 1;
+}
+
 @keyframes rotate-bird {
     0% {
         transform: scale(1.05) rotate(-2deg)
@@ -378,6 +382,10 @@ h1:after {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+}
+
+.attachment-div img {
+    flex-grow: 1;
 }
 
 /* a hacky animation for the blink; since the bird is
