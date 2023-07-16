@@ -115,16 +115,25 @@ def parse(line):
             text = escaped_line.rstrip()[2:]
             html = "<div class=\"fronter\"><img src=\"../assets/bird_open_mouth.svg\"/><p>"+text+"</p></div>"
         elif escaped_line.startswith("-&gt; "):
-            split_line = escaped_line.rstrip().split(" | ")
-            url = ' '.join(split_line[0].split(' ')[1:])
-            text = ""
-            img_quote_html = ""
-            if len(split_line) > 1: # There is text after the URL
-                text = " alt=\""+split_line[1]+"\""
-            if len(split_line) > 2: # There is a quote after the text
-                img_quote_html = "<i>"+split_line[2]+"</i>"
+            if " | " in escaped_line:
+                split_line = escaped_line.rstrip().split(" | ")
+                url = ' '.join(split_line[0].split(' ')[1:])
+                text = ""
+                img_quote_html = ""
+                if len(split_line) > 1: # There is text after the URL
+                    text = " alt=\""+split_line[1]+"\""
+                if len(split_line) > 2: # There is a quote after the text
+                    img_quote_html = "<i>"+split_line[2]+"</i>"
 
-            html = "<div class=\"attachment-div\"><img class=\"attachment\" src=\""+url+"\""+text+"/>"+img_quote_html+"</div>"
+                html = "<div class=\"attachment-div\"><img class=\"attachment\" src=\""+url+"\""+text+"/>"+img_quote_html+"</div>"
+            else: 
+                split_line = escaped_line.rstrip().split(" ")
+                url = split_line[1]
+                text = ""
+                if len(split_line) > 2: # There is text after the URL
+                    text = ' '.join(split_line[2:])
+
+                html = "<img class=\"attachment\" src=\""+url+"\" alt=\""+text+"\"/>"
         # Link/URL (" => ")
         elif escaped_line.startswith("=&gt; "):
             split_line = escaped_line.rstrip().split(" ")
