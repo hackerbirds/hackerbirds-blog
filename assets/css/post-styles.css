@@ -22,7 +22,6 @@
     --banner-shadow-color: #101010;
 }
 
-/* a whole 20 extra lines just for that one toggle button , yup */
 :root.dark {
     --highlight-color: rgb(118, 120, 88);
     --text-color-dark: #e3e3e3;
@@ -129,13 +128,6 @@ body {
     font-size: 1.3rem;
 }
 
-@media (min-width: 768px) {
-    body {
-        font-size: 1.1rem;
-        padding: 2rem;
-    }
-}
-
 h1,
 h2,
 h3,
@@ -163,10 +155,6 @@ h3:before {
     color: var(--highlight-color);
     display: inline-block;
     margin-right: 1ch;
-}
-
-h1:before {
-    content: '';
 }
 
 h2:before {
@@ -264,7 +252,7 @@ pre {
 }
 
 code {
-    font-family: "Courier New", Courier, monospace;
+    font-family: monospace;
     background-color: var(--fronter-background);
 }
 
@@ -291,18 +279,6 @@ footer {
 
 footer * {
     margin: auto;
-}
-
-h1:after {
-    text-shadow:
-        -2px -2px 0 var(--highlight-color),
-        0 -1px 0 var(--highlight-color),
-        1px -1px 0 var(--highlight-color),
-        1px 0 0 var(--highlight-color),
-        1px 1px 0 var(--fronter-background),
-        0 1px 0 var(--fronter-background),
-        -1px 1px 0 var(--fronter-background),
-        -1px 0 0 var(--fronter-background);
 }
 
 .fronter {
@@ -349,7 +325,6 @@ h1:after {
 .banner {
     box-shadow: 0 0 4em var(--banner-shadow-color);
     height: 100%;
-    backdrop-filter: invert(100%);
     width: 5vw;
     position: fixed;
     z-index: 1;
@@ -368,15 +343,11 @@ h1:after {
 .banner-button {
     background-color: var(--fronter-background);
     border: 3px solid var(--banner-shadow-color);
-    border-radius: 6px;
+    border-radius: 12px;
     color: var(--text-color);
     width: 34px;
     height: 34px;
-    text-decoration: none;
-    text-align: center;
-    padding: 0px;
     font-size: 18px;
-    align-items: center;
 }
 
 
@@ -398,7 +369,6 @@ h1:after {
 
 .serif .serif-button:after {
     font-family: serif;
-    content: "T"
 }
 
 .serif-button:after {
@@ -421,14 +391,7 @@ h1:after {
     flex-grow: 1; 
 }
 
-/* a hacky animation for the blink; since the bird is
-   all black, we can mess with the brightness to turn
-   the white eye dark */
 @keyframes blinking-bird {
-    0% {
-        filter: brightness(100%);
-    }
-
     68% {
         filter: brightness(100%);
     }
@@ -477,6 +440,11 @@ h1:after {
         border-left: 5vw solid var(--fronter-background);
         border: 0vw;
         margin-top: 30px;
+    }
+    
+    body {
+        font-size: 1.1rem;
+        padding: 2rem;
     }
 
     .fronter {
