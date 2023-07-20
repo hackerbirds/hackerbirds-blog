@@ -18,7 +18,6 @@
     --text-color-lighter: #000000;
     --fronter-background: #fffff0;
     --background: #ffffff;
-    --banner-color: #000000;
     --banner-shadow-color: #101010;
 }
 
@@ -29,7 +28,6 @@
     --text-color-lighter: #ffffff;
     --fronter-background: #1c1c00;
     --background: rgb(14, 14, 14);
-    --banner-color: #000000;
     --banner-shadow-color: #494900;
 }
 
@@ -40,7 +38,6 @@
     --text-color-lighter: #ffffff;
     --fronter-background: #000000;
     --background: rgb(0, 0, 0);
-    --banner-color: #000000;
     --banner-shadow-color: #2c2c00;
 }
 
@@ -75,7 +72,6 @@
         --text-color-lighter: #ffffff;
         --fronter-background: #1c1c00;
         --background: rgb(14, 14, 14);
-        --banner-color: #000000;
         --banner-shadow-color: #494900;
     }
 
