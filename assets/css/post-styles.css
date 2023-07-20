@@ -38,7 +38,7 @@
     --text-color-lighter: #ffffff;
     --fronter-background: #000000;
     --background: rgb(0, 0, 0);
-    --banner-shadow-color: #2c2c00;
+    --banner-shadow-color: #3f3f00;
 }
 
 :root.serif {
@@ -154,11 +154,11 @@ h3:before {
 }
 
 h2:before {
-    content: '❊';
+    content: '🟆';
 }
 
 h3:before {
-    content: '❊❊';
+    content: '🟀';
 }
 
 h1 {
@@ -177,22 +177,23 @@ h3 {
 
 ul {
     list-style: none;
+    padding-top: 0.5ch;
+    padding-bottom: 0.5ch;
     padding-left: 0;
 }
 
 ul li {
     position: relative;
+    padding: 0;
     padding-left: 3ch;
 }
 
 ul li:before {
-    content: '＊';
+    content: '•';
     font-weight: bold;
     color: var(--highlight-color);
+    left: 1ch;
     position: absolute;
-    left: 0;
-    font-family: inherit;
-    font-size: inherit;
 }
 
 main a:before {
