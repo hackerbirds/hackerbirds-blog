@@ -19,8 +19,8 @@ footer_html = """<br><br></main>
 
 def write_index_html(post):
     # Erases contents of index.html
-    open("index.html", "w").close()
-    with open("index.html", "a") as index_html:
+    open("result/index.html", "w").close()
+    with open("result/index.html", "a") as index_html:
         # Write header.html to index.html
         with open("header.html", "r") as header_html:
             index_html.write(header_html.read())
@@ -159,6 +159,7 @@ def parse(line):
 with open("post.txt", "r") as f:
     html = ""
     is_in_code_block = False
+    is_in_html_block = False
     is_in_list = False
     for line in f:
         # Beginning OR end of a code block
@@ -171,6 +172,12 @@ with open("post.txt", "r") as f:
                 is_in_code_block = True
                 # Open code block
                 html += "<pre aria-label=\"\">"
+        # Beginning OR end of an HTML block
+        if line.startswith("<>"):
+            if is_in_html_block is True:
+                is_in_html_block = False
+            else:
+                is_in_html_block = True
         # List element
         elif line.startswith("* "):
             # If not in a list already, put us in list mode
@@ -180,7 +187,9 @@ with open("post.txt", "r") as f:
             html += parse(line)
         else:
             # Line isn't ``` (code block) or starts with "*" (list)
-            if is_in_code_block is True:
+            if is_in_html_block is True:
+                html += line
+            elif is_in_code_block is True:
                 html += escape(line)
             elif is_in_list is True:
                 html += "</ul>"
