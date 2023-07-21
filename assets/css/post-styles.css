@@ -385,8 +385,8 @@ footer * {
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .attachment-div img {
@@ -395,6 +395,7 @@ footer * {
 
 .attachment-div i {
     z-index: 1;
+    text-align: center;
     color: var(--background);
     background-color: var(--text-color);
 }
