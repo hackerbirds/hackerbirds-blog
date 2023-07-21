@@ -116,8 +116,8 @@ body {
     color: var(--text-color);
     background-color: var(--background);
 
-    margin: 1rem auto;
-    padding: 1rem;
+    margin: 2rem auto;
+    padding: 4rem;
 }
 
 .serif body {
@@ -323,6 +323,7 @@ footer * {
     box-shadow: 0 0 4em var(--banner-shadow-color);
     height: 100%;
     width: 5vw;
+    min-width: 48px;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -345,6 +346,7 @@ footer * {
     width: 34px;
     height: 34px;
     font-size: 18px;
+    justify-content: center;
 }
 
 
@@ -382,10 +384,26 @@ footer * {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    gap: 10px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .attachment-div img {
     flex-grow: 1; 
+}
+
+.attachment-div i {
+    z-index: 1;
+    color: var(--background);
+    background-color: var(--text-color);
+}
+
+.attachment-div iframe {
+    aspect-ratio: 16 / 9;
+    flex-grow: 1; 
+    width: 80%;
+    max-width: 700px;
 }
 
 @keyframes blinking-bird {
