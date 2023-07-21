@@ -290,7 +290,8 @@ footer * {
 }
 
 .fronter img {
-    width: 120px;
+    max-width: 130px;
+    max-height: 100px;
     padding-left: 10px;
 }
 
@@ -448,7 +449,7 @@ footer * {
 @media screen and (min-width: 601px) {
     .banner-logo:hover {
         filter: drop-shadow(0 0 0.5em var(--highlight-color));
-        animation: 1s ease-in 0s infinite alternate-reverse rotate-bird;
+        animation: 1.1s ease-in-out 0.1s infinite rotate-bird;
     }
 }
 
