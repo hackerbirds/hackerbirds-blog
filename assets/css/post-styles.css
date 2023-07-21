@@ -285,7 +285,7 @@ footer * {
     align-items: center;
     flex-direction: row;
     border: 4px dotted var(--highlight-color);
-    padding: 5px;
+    padding: 0;
     margin: 4px;
 }
 
@@ -295,6 +295,8 @@ footer * {
 }
 
 .fronter p {
+    padding-left: 8px;
+    padding-right: 4px;
     flex-grow: 1;
 }
 
@@ -325,7 +327,7 @@ footer * {
     width: 5vw;
     min-width: 48px;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 0;
     left: 0;
     background-color: var(--banner-color);
@@ -438,7 +440,7 @@ footer * {
     margin-top: 2vh;
     margin-left: 6vw;
     max-width: 9vw;
-    z-index: 2;
+    z-index: 3;
     animation: 12s ease-in 3s infinite alternate-reverse blinking-bird;
 }
 
@@ -462,25 +464,36 @@ footer * {
         font-size: 1.1rem;
         padding: 2rem;
     }
-
+    
     .fronter {
-        padding: 0;
+        display: block;
+        min-height: 70px;
     }
-
+    
     .fronter p {
+        float: none;
+        text-align: justify;
         padding: 8px;
     }
 
     .fronter img {
-        max-width: 40px;
+        max-width: 48px;
+        max-height: 48px;
         margin: 10px;
         padding: 4px;
+        float: left;
     }
 
     .banner {
         height: 50px;
         width: 100%;
         flex-direction: row;
+    }
+    
+    .banner-button {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
     }
 
     .banner-logo {
