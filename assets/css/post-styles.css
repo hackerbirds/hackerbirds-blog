@@ -28,7 +28,7 @@
     --text-color-lighter: #ffffff;
     --fronter-background: #1c1c00;
     --background: rgb(14, 14, 14);
-    --banner-shadow-color: #494900;
+    --banner-shadow-color: #606008;
 }
 
 :root.reader.dark {
@@ -38,11 +38,11 @@
     --text-color-lighter: #ffffff;
     --fronter-background: #000000;
     --background: rgb(0, 0, 0);
-    --banner-shadow-color: #3f3f00;
+    --banner-shadow-color: #c6c6c6;
 }
 
 :root.serif {
-    --font: serif; 
+    --font: serif;
 }
 
 .dark .fronter img {
@@ -51,8 +51,8 @@
 
 .dark .attachment {
     filter: brightness(60%);
-    background-color: var(--text-color);
-    box-shadow: 0 0 20px 20px var(--text-color);
+    background-color: var(--highlight-color);
+    box-shadow: 0 0 20px 20px var(--highlight-color);
 }
 
 .reader .attachment {
@@ -64,6 +64,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
+
     :root,
     :root.dark {
         --highlight-color: rgb(118, 120, 88);
@@ -72,7 +73,7 @@
         --text-color-lighter: #ffffff;
         --fronter-background: #1c1c00;
         --background: rgb(14, 14, 14);
-        --banner-shadow-color: #494900;
+        --banner-shadow-color: #606008;
     }
 
     .fronter img {
@@ -80,9 +81,9 @@
     }
 
     .dark .attachment {
-        filter: brightness(0.6);
-        background-color: var(--text-color);
-        box-shadow: 0 0 20px 20px var(--text-color);
+        filter: brightness(60%);
+        background-color: var(--highlight-color);
+        box-shadow: 0 0 20px 20px var(--highlight-color);
     }
 
     .reader .attachment {
@@ -196,14 +197,7 @@ ul li:before {
     position: absolute;
 }
 
-main a:before {
-    content: "~>";
-    left: -1ch;
-    position: relative;
-    display: inline-block;
-}
-
-main a:hover {
+main a:hover.arrow {
     background-color: var(--highlight-color);
     color: var(--text-color-dark);
     padding: 2px;
@@ -215,9 +209,14 @@ main a:hover {
 .reader main a:hover {
     background-color: var(--background);
     border: 2px dashed var(--text-color);
+    padding: 0px 4px 0px 4px;
     border-radius: 8px;
     color: var(--text-color-dark);
     text-decoration: none;
+}
+
+.reader main a.arrow:hover {
+    padding: 0px 4px 0px 1.5ch;
 }
 
 a {
@@ -228,24 +227,35 @@ a {
     -x-webkit-line-break: anywhere;
 }
 
-main a {
+main a.arrow {
+    margin-bottom: 1rem;
     margin-left: 2ch;
+}
+
+main a.arrow:before {
+    content: "~>";
+    left: -1ch;
+    position: relative;
+    display: inline-block;
 }
 
 main img {
     display: block;
     max-width: 400px;
     width: 80%;
-    margin: 1rem auto;
 }
 
 pre {
     padding: 1ch;
     background-color: var(--fronter-background);
-    color: var(--text-color-dark);
+    color: var(--text-color-lighter);
     line-height: 1.1;
     font-family: monospace;
     overflow-x: auto;
+}
+
+.reader pre {
+    border: 2px dashed var(--text-color);
 }
 
 code {
@@ -278,6 +288,22 @@ footer * {
     margin: auto;
 }
 
+summary {
+    filter: drop-shadow(0 0 1em var(--highlight-color));
+}
+
+details>summary {
+    padding: 4px;
+    margin: 8px;
+    border: 1px dashed var(--highlight-color);
+    padding-left: 6px;
+    background-color: var(--fronter-background);
+}
+
+details[open]>div {
+    padding: 8px;
+}
+
 .fronter {
     display: flex;
     justify-content: space-around;
@@ -285,8 +311,7 @@ footer * {
     align-items: center;
     flex-direction: row;
     border: 4px dotted var(--highlight-color);
-    padding: 0;
-    margin: 4px;
+    padding: 4px;
 }
 
 .fronter img {
@@ -296,6 +321,7 @@ footer * {
 }
 
 .fronter p {
+    margin: 8px 0px 8px 0px;
     padding-left: 8px;
     padding-right: 4px;
     flex-grow: 1;
@@ -387,25 +413,29 @@ footer * {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    width: 100%;
+    gap: 4px;
+    max-height: 600px;
 }
 
-.attachment-div img {
-    flex-grow: 1; 
+.attachment {
+    max-width: 80%;
+    height: 100%;
+    object-fit: scale-down;
+    width: auto;
 }
 
 .attachment-div i {
     z-index: 1;
     text-align: center;
-    color: var(--background);
-    background-color: var(--text-color);
+    background-color: var(--fronter-background);
 }
 
 .attachment-div iframe {
     aspect-ratio: 16 / 9;
-    flex-grow: 1; 
+    flex-grow: 1;
     width: 80%;
     max-width: 700px;
 }
@@ -460,17 +490,17 @@ footer * {
         border: 0vw;
         margin-top: 30px;
     }
-    
+
     body {
         font-size: 1.1rem;
         padding: 2rem;
     }
-    
+
     .fronter {
         display: block;
         min-height: 70px;
     }
-    
+
     .fronter p {
         float: none;
         text-align: justify;
@@ -478,8 +508,8 @@ footer * {
     }
 
     .fronter img {
-        max-width: 48px;
-        max-height: 48px;
+        max-width: 47px;
+        max-height: 47px;
         margin: 10px;
         padding: 4px;
         float: left;
@@ -490,7 +520,7 @@ footer * {
         width: 100%;
         flex-direction: row;
     }
-    
+
     .banner-button {
         width: 40px;
         height: 40px;
