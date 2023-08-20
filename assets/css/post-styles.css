@@ -1,11 +1,11 @@
 :root,
 :root.light {
-    --highlight-color: #bbbb8e;
+    --highlight-color: #f4ee94;
     --text-color-dark: #000000;
     --text-color: #000000;
     --text-color-lighter: #1D1D1D;
-    --fronter-background: #fffeb7;
-    --background: #ffffff;
+    --fronter-background: #faface;
+    --background: #f9f9ea;
     --font: monospace;
     --banner-color: #000000;
     --banner-shadow-color: #101010;
@@ -16,29 +16,29 @@
     --text-color-dark: #000000;
     --text-color: #000000;
     --text-color-lighter: #000000;
-    --fronter-background: #fffff0;
+    --fronter-background: #f8f8d7;
     --background: #ffffff;
     --banner-shadow-color: #101010;
 }
 
 :root.dark {
-    --highlight-color: rgb(118, 120, 88);
+    --highlight-color: #b6b264;
     --text-color-dark: #e3e3e3;
-    --text-color: rgb(220, 220, 220);
+    --text-color: #dcdcdc;
     --text-color-lighter: #ffffff;
     --fronter-background: #1c1c00;
-    --background: rgb(14, 14, 14);
-    --banner-shadow-color: #606008;
+    --background: #0c0c05;
+    --banner-shadow-color: #7a7006;
 }
 
 :root.reader.dark {
-    --highlight-color: rgb(251, 252, 239);
-    --text-color-dark: #ffffff;
-    --text-color: rgb(255, 255, 255);
-    --text-color-lighter: #ffffff;
+    --highlight-color: #fff5e7;
+    --text-color-dark: #eeeeee;
+    --text-color: #ffffff;
+    --text-color-lighter: #eeeeee;
     --fronter-background: #000000;
-    --background: rgb(0, 0, 0);
-    --banner-shadow-color: #c6c6c6;
+    --background: #000000;
+    --banner-shadow-color: #9c9c9c;
 }
 
 :root.serif {
@@ -67,13 +67,13 @@
 
     :root,
     :root.dark {
-        --highlight-color: rgb(118, 120, 88);
+        --highlight-color: #b6b264;
         --text-color-dark: #e3e3e3;
-        --text-color: rgb(220, 220, 220);
+        --text-color: #dcdcdc;
         --text-color-lighter: #ffffff;
         --fronter-background: #1c1c00;
-        --background: rgb(14, 14, 14);
-        --banner-shadow-color: #606008;
+        --background: #0c0c05;
+        --banner-shadow-color: #7a7006;
     }
 
     .fronter img {
@@ -187,7 +187,7 @@ ul {
 }
 
 ul li {
-    position: relative;w
+    position: relative;
     padding: 0;
     padding-left: 3ch;
 }
@@ -484,29 +484,29 @@ div.attachment img {
     0% {
         filter: brightness(100%);
     }
-    
+
     10% {
         filter: brightness(0%);
         transform: rotate(+3deg);
     }
-    
+
     20% {
         filter: brightness(100%);
     }
-    
+
     50% {
         filter: brightness(100%);
     }
-    
+
     60% {
         filter: brightness(0%);
         transform: rotate(+3deg);
     }
-    
+
     70% {
         filter: brightness(100%);
     }
-    
+
     75% {
         transform: rotate(-1deg);
     }
@@ -523,12 +523,12 @@ div.attachment img {
 }
 
 /* this hover animation is disabled in the mobile layout */
-@media screen and (min-width: 601px) {
+@media screen and (min-width: 701px) {
     .banner:hover {
         border-right: 1px dashed var(--highlight-color);
         width: calc(5vw + 6px);
     }
-    
+
     .banner:hover .banner-logo {
         margin-left: calc(6vw + 20px);
         animation-iteration-count: 2;
@@ -543,7 +543,7 @@ div.attachment img {
 }
 
 /* mobile friendly interface */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
     :root {
         border-left: 5vw solid var(--fronter-background);
         border: 0vw;
@@ -592,7 +592,7 @@ div.attachment img {
         max-width: 100px;
         height: 50px;
     }
-    
+
     .attachment {
         max-width: 90%;
     }
