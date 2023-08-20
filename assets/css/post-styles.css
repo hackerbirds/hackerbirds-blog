@@ -320,7 +320,7 @@ details[open]>div {
 
 @keyframes rotate-bird {
     0% {
-        transform: scale(1.05) rotate(-2deg)
+        transform: scale(1.05) rotate(-2deg);
     }
 
     50% {
@@ -367,9 +367,11 @@ details[open]>div {
     border: 3px solid var(--banner-shadow-color);
     border-radius: 12px;
     color: var(--text-color);
-    width: 34px;
-    height: 34px;
-    font-size: 18px;
+    min-width: 34px;
+    min-height: 34px;
+    width: calc(5vw - 20px);
+    height: calc(5vw - 20px);
+    font-size: clamp(18px, calc(5vw - 38px), 28px);
     justify-content: center;
 }
 
@@ -532,7 +534,6 @@ div.attachment img {
     .banner:hover .banner-logo {
         margin-left: calc(6vw + 20px);
         animation-iteration-count: 2;
-        animation-fill-mode: both;
         animation: 0.5s linear disturbed-bird;
     }
 
