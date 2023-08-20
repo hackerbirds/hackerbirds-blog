@@ -106,12 +106,15 @@
     bottom: 0;
     left: 0;
     overflow: auto;
+    overflow-x: hidden;
 }
 
 body {
     font-family: var(--font);
-    font-size: 1rem;
+    font-size: 1.1rem;
     text-rendering: optimizeLegibility;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
     line-height: 1.6;
     max-width: 85vw;
     color: var(--text-color);
@@ -155,11 +158,11 @@ h3:before {
 }
 
 h2:before {
-    content: '🟆';
+    content: 'ðŸŸ†';
 }
 
 h3:before {
-    content: '🟀';
+    content: 'ðŸŸ€';
 }
 
 h1 {
@@ -184,13 +187,13 @@ ul {
 }
 
 ul li {
-    position: relative;
+    position: relative;w
     padding: 0;
     padding-left: 3ch;
 }
 
 ul li:before {
-    content: '•';
+    content: 'â€¢';
     font-weight: bold;
     color: var(--highlight-color);
     left: 1ch;
@@ -237,12 +240,6 @@ main a.arrow:before {
     left: -1ch;
     position: relative;
     display: inline-block;
-}
-
-main img {
-    display: block;
-    max-width: 400px;
-    width: 80%;
 }
 
 pre {
@@ -315,16 +312,10 @@ details[open]>div {
 }
 
 .fronter img {
-    max-width: 130px;
+    max-width: 100px;
     max-height: 100px;
+    padding: 6px;
     padding-left: 10px;
-}
-
-.fronter p {
-    margin: 8px 0px 8px 0px;
-    padding-left: 8px;
-    padding-right: 4px;
-    flex-grow: 1;
 }
 
 @keyframes rotate-bird {
@@ -342,16 +333,20 @@ details[open]>div {
 }
 
 .fronter img:hover {
-    animation-name: rotate-bird;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
+    animation: 1s ease-in-out infinite rotate-bird;
+}
+
+.fronter p {
+    margin: 8px 0px 8px 0px;
+    padding: 8px;
+    flex-grow: 1;
 }
 
 .banner {
     box-shadow: 0 0 4em var(--banner-shadow-color);
     height: 100%;
     width: 5vw;
+    transition: width 0.5s;
     min-width: 48px;
     position: fixed;
     z-index: 2;
@@ -380,19 +375,19 @@ details[open]>div {
 
 
 .dark .theme-button:after {
-    content: "❍"
+    content: "â"
 }
 
 .theme-button:after {
-    content: "☉︎"
+    content: "â˜‰ï¸Ž"
 }
 
 .reader .reader-button:after {
-    content: "◕"
+    content: "â—•"
 }
 
 .reader-button:after {
-    content: "◐"
+    content: "â—"
 }
 
 .serif .serif-button:after {
@@ -415,16 +410,9 @@ details[open]>div {
     justify-content: space-between;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    width: 100%;
+    max-width: 100%;
+    max-height: 500px;
     gap: 4px;
-    max-height: 600px;
-}
-
-.attachment {
-    max-width: 80%;
-    height: 100%;
-    object-fit: scale-down;
-    width: auto;
 }
 
 .attachment-div i {
@@ -438,6 +426,32 @@ details[open]>div {
     flex-grow: 1;
     width: 80%;
     max-width: 700px;
+}
+
+.attachment {
+    max-width: 70%;
+    max-height: inherit;
+    height: auto;
+    object-fit: contain;
+}
+
+picture img {
+    max-width: 100%;
+    max-height: inherit;
+}
+
+div.attachment {
+    display: flex;
+    max-width: inherit;
+    justify-content: space-evenly;
+    margin: 4px;
+}
+
+div.attachment img {
+    min-width: 0;
+    max-width: inherit;
+    max-height: inherit;
+    object-fit: contain;
 }
 
 @keyframes blinking-bird {
@@ -466,13 +480,57 @@ details[open]>div {
     }
 }
 
+@keyframes disturbed-bird {
+    0% {
+        filter: brightness(100%);
+    }
+    
+    10% {
+        filter: brightness(0%);
+        transform: rotate(+3deg);
+    }
+    
+    20% {
+        filter: brightness(100%);
+    }
+    
+    50% {
+        filter: brightness(100%);
+    }
+    
+    60% {
+        filter: brightness(0%);
+        transform: rotate(+3deg);
+    }
+    
+    70% {
+        filter: brightness(100%);
+    }
+    
+    75% {
+        transform: rotate(-1deg);
+    }
+}
+
 .banner-logo {
     flex-grow: 2;
     margin-top: 2vh;
     margin-left: 6vw;
+    transition: margin-left 0.4s;
     max-width: 9vw;
     z-index: 3;
     animation: 12s ease-in 3s infinite alternate-reverse blinking-bird;
+}
+
+.banner:hover {
+    border-right: 1px dashed var(--highlight-color);
+    width: calc(5vw + 6px);
+}
+
+.banner:hover .banner-logo {
+    margin-left: calc(6vw + 20px);
+    animation-iteration-count: 2;
+    animation: 0.5s linear disturbed-bird;
 }
 
 /* this hover animation is disabled in the mobile layout */
@@ -508,8 +566,8 @@ details[open]>div {
     }
 
     .fronter img {
-        max-width: 47px;
-        max-height: 47px;
+        max-width: 70px;
+        max-height: 70px;
         margin: 10px;
         padding: 4px;
         float: left;
@@ -532,5 +590,9 @@ details[open]>div {
         margin-top: 55px;
         max-width: 100px;
         height: 50px;
+    }
+    
+    .attachment {
+        max-width: 90%;
     }
 }
