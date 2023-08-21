@@ -1,5 +1,4 @@
-:root,
-:root.light {
+:root {
     --highlight-color: #f4ee94;
     --text-color-dark: #000000;
     --text-color: #000000;
@@ -21,76 +20,47 @@
     --banner-shadow-color: #101010;
 }
 
-:root.dark {
-    --highlight-color: #b6b264;
-    --text-color-dark: #e3e3e3;
-    --text-color: #dcdcdc;
-    --text-color-lighter: #ffffff;
-    --fronter-background: #1c1c00;
-    --background: #0c0c05;
-    --banner-shadow-color: #7a7006;
-}
-
-:root.reader.dark {
-    --highlight-color: #fff5e7;
-    --text-color-dark: #eeeeee;
-    --text-color: #ffffff;
-    --text-color-lighter: #eeeeee;
-    --fronter-background: #000000;
-    --background: #000000;
-    --banner-shadow-color: #9c9c9c;
-}
-
 :root.serif {
     --font: serif;
-}
-
-.dark .fronter img {
-    filter: drop-shadow(0 0 2em var(--highlight-color));
-}
-
-.dark .attachment {
-    filter: brightness(60%);
-    background-color: var(--highlight-color);
-    box-shadow: 0 0 20px 20px var(--highlight-color);
 }
 
 .reader .attachment {
     filter: contrast(110%);
 }
 
-.reader.dark .attachment {
-    filter: brightness(100%) contrast(110%);
-}
-
 @media (prefers-color-scheme: dark) {
-
-    :root,
-    :root.dark {
-        --highlight-color: #b6b264;
-        --text-color-dark: #e3e3e3;
-        --text-color: #dcdcdc;
-        --text-color-lighter: #ffffff;
-        --fronter-background: #1c1c00;
-        --background: #0c0c05;
-        --banner-shadow-color: #7a7006;
+    :root {
+      color-scheme: dark;
+      --highlight-color: #b6b264;
+      --text-color-dark: #e3e3e3;
+      --text-color: #dcdcdc;
+      --text-color-lighter: #ffffff;
+      --fronter-background: #1c1c00;
+      --background: #0c0c05;
+      --banner-shadow-color: #7a7006;
+    }
+    
+    :root.reader {
+      --highlight-color: #fff5e7;
+      --text-color-dark: #eeeeee;
+      --text-color: #ffffff;
+      --text-color-lighter: #eeeeee;
+      --fronter-background: #000000;
+      --background: #000000;
+      --banner-shadow-color: #9c9c9c;
     }
 
     .fronter img {
         filter: drop-shadow(0 0 2em var(--highlight-color));
     }
 
-    .dark .attachment {
+    .attachment {
         filter: brightness(60%);
         background-color: var(--highlight-color);
         box-shadow: 0 0 20px 20px var(--highlight-color);
     }
-
+    
     .reader .attachment {
-        filter: contrast(110%);
-    }
-
-    .reader.dark .attachment {
         filter: brightness(100%) contrast(110%);
     }
 }
@@ -98,8 +68,6 @@
 :root {
     border: 5vw solid var(--fronter-background);
     border-left: 10vw solid var(--fronter-background);
-
-    border-radius: 5 5 5 5;
     position: relative;
     top: 0;
     right: 0;
@@ -158,11 +126,11 @@ h3:before {
 }
 
 h2:before {
-    content: '🟆';
+    content: 'ðŸŸ†';
 }
 
 h3:before {
-    content: '🟀';
+    content: 'ðŸŸ€';
 }
 
 h1 {
@@ -193,7 +161,7 @@ ul li {
 }
 
 ul li:before {
-    content: '•';
+    content: 'â€¢';
     font-weight: bold;
     color: var(--highlight-color);
     left: 1ch;
@@ -226,8 +194,6 @@ a {
     text-decoration: underline;
     color: inherit;
     display: inline-block;
-    line-break: anywhere;
-    -x-webkit-line-break: anywhere;
 }
 
 main a.arrow {
@@ -375,21 +341,12 @@ details[open]>div {
     justify-content: center;
 }
 
-
-.dark .theme-button:after {
-    content: "❍"
-}
-
-.theme-button:after {
-    content: "☉︎"
-}
-
 .reader .reader-button:after {
-    content: "◕"
+    content: "â—•"
 }
 
 .reader-button:after {
-    content: "◐"
+    content: "â—"
 }
 
 .serif .serif-button:after {
