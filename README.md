@@ -4,7 +4,9 @@ Write blog posts quickly using this little script. Originally based on [Lichen](
 
 ## Features
 
-Below are examples for each of the features. You may also check at `post.md` and the resulting html file in `result/index.html` to see how it looks in practice.
+Below are examples for each of the features. 
+
+# You may also check at `post.md` and the resulting html file in `result/index.html` to see how it looks in practice.
 
 #### Inline text formatting
 * Bold text: `Wrap the text with a star (*). Example: *this text will be bold*`
@@ -91,6 +93,15 @@ you can add a line consisting of three consecutive dashes ("---")
 Like so:
 ---
 Now, this text is separated and alone.
+````
+
+#### Raw HTML Block:
+
+````
+<>
+<!-- anything between the <> is raw HTML. -->
+<p style="color: red;">Hello!</p>
+<>
 ````
 
 ## What? Why?
