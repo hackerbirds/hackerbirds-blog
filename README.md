@@ -4,47 +4,95 @@ Write blog posts quickly using this little script. Originally based on [Lichen](
 
 Write in `post.txt` like we just did, then run `python3 build.py`, and the resulting `index.html` is your pretty website
 
-#### Features
+## Features
+
+Below are examples for each of the features. You may also check at `post.md` and the resulting html file in `result/index.html` to see how it looks in practice.
+
+#### Inline text formatting
+* Bold text: `Wrap the text with a star (*). Example: *this text will be bold*`
+* Italic text: `Wrap the text with two underscores (__). Example: __this text will be italic__`
+* Strikethrough text: `Wrap the text with two tildes (~~). Example: ~~this text will be strikethoughd~~`
+
+#### Title and headers
+
+* `# Title`
+* `## Big header`
+* `### Smaller header`
+
+#### Code
+
+* Inline code/monospace font: ````Wrap the text with two ticks (`). Example: `this will be monospace`.````
+* Code blocks/monospace blocks:
 ````
-1) Each new line in post.txt is a new line in the HTML.
+Wrap the text with three ticks *in new lines* to start the code block.
+Make sure the lines with the ticks does not contain any text.
 
-FORMATTING:
- *bold text*
- __italic text__
-
-HEADERS:
-# Title
-## Big header
-### Smaller header
-
-CODE BLOCKS:
-You can add `inline code with single quotes` in the middle of your text...
+Example:
 
 ```
-Or full code blocks.
+this is a code block!
 ```
+````
 
-UNORDERED LISTS:
+#### Unordered lists
+
+````
+How to make an unordered list:
 * Make a list
 * Like this
+* One list element per line
 * Add a star for each element in the list
+````
 
-IMAGES:
--> images/sourceimg.png | You can add alt text too | And some text to show up under the image too
+#### Ordered lists
 
-BLOCK QUOTE:
-> Very important quote.
+````
+How to make an ordered list:
+*) Make a list
+*) Like this
+*) One list element per line
+*) Add a star and a closing parenthesis for each element in the list
+````
 
-URL / LINKS:
+#### Images (with optional text below)
+````
+How to add an image:
+
+With no text below:
+-> path/to/your/image.png | This is some alt text
+
+With text below:
+-> path/to/your/image.png | This is some alt text | Optionally, you can add visible text below the image
+````
+
+#### Block quotes
+````
+To make a block quote, add a new line and start it with "> " (don't forget the space). Anything after will be part of the quote.
+
+> This is a very serious quote.
+````
+
+#### URL/Links
+
+````
+Links are similar looking to images, so be careful to not confuse between them!
+
 => https://zombo.com You can do anything at Zombo.com
+````
 
-HACKERBIRDS'S "FRONTER" QUOTE BLOCK:
-% If you do this, a little bird will show up next to your gorgeous text.
+#### Hackerbirds's signature bird dialogue block
 
-HORIZONTAL BAR BREAK:
+````
+% If you write a line starting with "%" like this, a little bird will show up next to your gorgeous text.
+````
+
+#### Horizontal bar break:
+````
+To add an horizontal bar to break off your paragraphs,
+you can add a line consisting of three consecutive dashes ("---")
+Like so:
 ---
-(this creates a line to separate your text)
-
+Now, this text is separated and alone.
 ````
 
 ## What? Why?
