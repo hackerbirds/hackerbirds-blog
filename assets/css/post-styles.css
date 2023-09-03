@@ -126,11 +126,11 @@ h3:before {
 }
 
 h2:before {
-    content: 'ðŸŸ†';
+    content: '%';
 }
 
 h3:before {
-    content: 'ðŸŸ€';
+    content: 'ooo';
 }
 
 h1 {
@@ -161,7 +161,7 @@ ul li {
 }
 
 ul li:before {
-    content: 'â€¢';
+    content: '-';
     font-weight: bold;
     color: var(--highlight-color);
     left: 1ch;
@@ -342,11 +342,11 @@ details[open]>div {
 }
 
 .reader .reader-button:after {
-    content: "â—•"
+    content: "a"
 }
 
 .reader-button:after {
-    content: "â—"
+    content: "A"
 }
 
 .serif .serif-button:after {
