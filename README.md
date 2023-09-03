@@ -2,8 +2,6 @@
 
 Write blog posts quickly using this little script. Originally based on [Lichen](https://lichen.sensorstation.co/), it is backwards compatible with Gemtext.
 
-Write in `post.txt` like we just did, then run `python3 build.py`, and the resulting `index.html` is your pretty website
-
 ## Features
 
 Below are examples for each of the features. You may also check at `post.md` and the resulting html file in `result/index.html` to see how it looks in practice.
