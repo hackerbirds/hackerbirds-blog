@@ -1,6 +1,7 @@
 # Creating blog posts faster with hackerbirds-blog
 
 (To see the text before building, see `post.md`. If you want the compiled HTML, see `result/index.html`.)
+(If you are reading this through GitHub, the markdown viewer will automatically enable. Please click "Raw" to see the raw version, this is important!!)
 
 Creating paragraphs is easy. Just write as much as you want in one straight line, and to make a new paragraph...
 
