@@ -174,6 +174,8 @@ def parse(line):
             html = "<hr>"
         else:
             html = "<p>"+escaped_line.rstrip()+"</p>"
+            html = html.replace("\star", "*")
+            html = html.replace("\\tick", "`")
     return html
 
 with open("post.md", "r") as f:
