@@ -100,7 +100,27 @@ def parse(line):
                 else: 
                     escaped_line = escaped_line[:code_tick_index] + "</b>" + escaped_line[code_tick_index+1:]
                     open_tag = True
-                    
+        # Inline strikethrough text
+        if ('~~' in escaped_line):
+            split_code_line = escaped_line.split("~~")
+            if len(split_code_line) % 2 == 0:
+                raise Exception("Strikethrough formatted at line \""+line+"\". Are you sure there is the right amount of '~~' in your line?")
+
+            open_tag = True
+            # For loop for all the `
+            for thing in split_code_line:
+                # Actually the loop goes one extra round so
+                # we need this if condition for when there are no more `
+                if "~~" not in escaped_line:
+                    break
+                code_tick_index = escaped_line.index("~~")
+                if open_tag is True:
+                    escaped_line = escaped_line[:code_tick_index] + "<s>" + escaped_line[code_tick_index+2:]
+                    open_tag = False
+                else: 
+                    escaped_line = escaped_line[:code_tick_index] + "</s>" + escaped_line[code_tick_index+2:]
+                    open_tag = True
+
         # Headers: id is used to scroll
         if escaped_line.startswith("# "):
             text = escaped_line.rstrip()[2:]
@@ -144,7 +164,7 @@ def parse(line):
 
             html = "<a class=\"arrow\" href=\""+url+"\">"+text+"</a>"
         # List element
-        elif escaped_line.startswith("* "):
+        elif escaped_line.startswith("* ") or escaped_line.startswith("*) "):
             html = "<li>"+parse(line.rstrip()[2:])+"</li>"
         # Blockquote (" > ")
         elif escaped_line.startswith("&gt; ") and not escaped_line.startswith("=&gt; "):
@@ -156,11 +176,12 @@ def parse(line):
             html = "<p>"+escaped_line.rstrip()+"</p>"
     return html
 
-with open("post.txt", "r") as f:
+with open("post.md", "r") as f:
     html = ""
     is_in_code_block = False
     is_in_html_block = False
     is_in_list = False
+    is_in_ordered_list = False
     for line in f:
         # Beginning OR end of a code block
         if line == "```\n":
@@ -185,6 +206,12 @@ with open("post.txt", "r") as f:
                 html += "<ul>"
                 is_in_list = True
             html += parse(line)
+        elif line.startswith("*) "):
+            # If not in a list already, put us in list mode
+            if is_in_ordered_list is False:
+                html += "<ol>"
+                is_in_ordered_list = True
+            html += parse(line)
         else:
             # Line isn't ``` (code block) or starts with "*" (list)
             if is_in_html_block is True:
@@ -196,6 +223,11 @@ with open("post.txt", "r") as f:
                 html += parse(line)
                 # We exit list mode
                 is_in_list = False
+            elif is_in_ordered_list is True:
+                html += "</ol>"
+                html += parse(line)
+                # We exit ordered list mode
+                is_in_ordered_list = False
             else:
                 html += parse(line)
 
