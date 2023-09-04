@@ -111,10 +111,12 @@ a {
     margin: 0;
 }
 
-h1,
 h2,
 h3 {
-    font-weight: bold;
+    margin-bottom: -14px;
+    margin-left: 4px;
+    font-weight: bolder;
+    color: var(--text-color-lighter);
 }
 
 h1:before,
@@ -134,17 +136,16 @@ h3:before {
 }
 
 h1 {
-    font-size: 1.7rem;
+    font-size: 1.8rem;
+    font-weight: bold;
 }
 
 h2 {
-    font-size: 1.4rem;
-    color: var(--text-color-lighter);
+    font-size: 1.5rem;
 }
 
 h3 {
-    font-size: 1.2rem;
-    color: var(--text-color-lighter);
+    font-size: 1.25rem;
 }
 
 ul {
@@ -312,7 +313,6 @@ details[open]>div {
     box-shadow: 0 0 4em var(--banner-shadow-color);
     height: 100%;
     width: 5vw;
-    transition: width 0.5s;
     min-width: 48px;
     position: fixed;
     z-index: 2;
@@ -342,11 +342,11 @@ details[open]>div {
 }
 
 .reader .reader-button:after {
-    content: "a"
+    content: "â—”"
 }
 
 .reader-button:after {
-    content: "A"
+    content: "â—•"
 }
 
 .serif .serif-button:after {
@@ -485,11 +485,13 @@ div.attachment img {
 @media screen and (min-width: 701px) {
     .banner:hover {
         border-right: 1px dashed var(--highlight-color);
-        width: calc(5vw + 6px);
+        transition: padding 0.5s;
+        padding: 4px;
     }
 
     .banner:hover .banner-logo {
-        margin-left: calc(6vw + 20px);
+        transition: margin-left 0.25s;
+        margin-left: calc(6vw + 22px);
         animation-iteration-count: 2;
         animation: 0.5s linear disturbed-bird;
     }
