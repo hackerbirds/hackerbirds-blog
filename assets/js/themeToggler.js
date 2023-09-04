@@ -9,8 +9,8 @@ function loadTheme() {
 
 	// load the buttons dynamically no that a no-JS user will not see the buttons 
 	// (they'd be useless to them)
-	document.getElementById("banner-id").insertAdjacentHTML("beforeend", "<button onclick=\"toggleReader()\" name=\"Reader mode toggle button\" title=\"Toggle reader mode (increases contrast)\" class=\"banner-button reader-button\"></button>");
-	document.getElementById("banner-id").insertAdjacentHTML("beforeend", "<button onclick=\"toggleSerif()\" name=\"Seif mode toggle button\" title=\"Toggle serif mode (changes font)\" class=\"banner-button serif-button\"></button>");
+	document.getElementById("banner-id").insertAdjacentHTML("beforeend", "<button onclick=\"toggleReader()\" name=\"Reader mode toggle button\" title=\"Toggle high contrast mode\" class=\"banner-button reader-button\"></button>");
+	document.getElementById("banner-id").insertAdjacentHTML("beforeend", "<button onclick=\"toggleSerif()\" name=\"Seif mode toggle button\" title=\"Toggle serif font mode\" class=\"banner-button serif-button\"></button>");
 }
 
 function toggleReader() {
