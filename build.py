@@ -162,7 +162,7 @@ def parse(line):
             if len(split_line) > 2: # There is text after the URL
                 text = ' '.join(split_line[2:])
 
-            html = "<a class=\"arrow\" href=\""+url+"\">"+text+"</a>"
+            html = "<a class=\"arrow\" href=\""+url+"\">"+text+"</a><br>"
         # List element
         elif escaped_line.startswith("* ") or escaped_line.startswith("*) "):
             html = "<li>"+parse(line.rstrip()[2:])+"</li>"
