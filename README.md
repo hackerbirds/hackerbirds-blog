@@ -2,6 +2,12 @@
 
 Write blog posts quickly using this little script. Originally based on [Lichen](https://lichen.sensorstation.co/), it is backwards compatible with Gemtext formatting.
 
+## Installation and usage
+
+Our python script uses the `watchdog` library to detect file changes and automatically rebuild the HTML page. To instlal `watchdog`, run `python3 -m pip install watchdog`.
+
+Everything else should "just work" with `python3 build.py`.
+
 ## Features
 
 Below are examples for each of the features. 
