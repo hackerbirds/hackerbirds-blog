@@ -178,59 +178,83 @@ def parse(line):
             html = html.replace("\\tick", "`")
     return html
 
-with open("post.md", "r") as f:
-    html = ""
-    is_in_code_block = False
-    is_in_html_block = False
-    is_in_list = False
-    is_in_ordered_list = False
-    for line in f:
-        # Beginning OR end of a code block
-        if line == "```\n":
-            if is_in_code_block is True:
-                is_in_code_block = False
-                # Close code bock
-                html += "</pre>"
-            else:
-                is_in_code_block = True
-                # Open code block
-                html += "<pre aria-label=\"\">"
-        # Beginning OR end of an HTML block
-        elif line.startswith("<>"):
-            if is_in_html_block is True:
-                is_in_html_block = False
-            else:
-                is_in_html_block = True
-        # List element
-        elif line.startswith("* "):
-            # If not in a list already, put us in list mode
-            if is_in_list is False:
-                html += "<ul>"
-                is_in_list = True
-            html += parse(line)
-        elif line.startswith("*) "):
-            # If not in a list already, put us in list mode
-            if is_in_ordered_list is False:
-                html += "<ol>"
-                is_in_ordered_list = True
-            html += parse(line)
-        else:
-            # Line isn't ``` (code block) or starts with "*" (list)
-            if is_in_html_block is True:
-                html += line
-            elif is_in_code_block is True:
-                html += escape(line)
-            elif is_in_list is True:
-                html += "</ul>"
+def build():
+    with open("post.md", "r") as f:
+        html = ""
+        is_in_code_block = False
+        is_in_html_block = False
+        is_in_list = False
+        is_in_ordered_list = False
+        for line in f:
+            # Beginning OR end of a code block
+            if line == "```\n":
+                if is_in_code_block is True:
+                    is_in_code_block = False
+                    # Close code bock
+                    html += "</pre>"
+                else:
+                    is_in_code_block = True
+                    # Open code block
+                    html += "<pre aria-label=\"\">"
+            # Beginning OR end of an HTML block
+            elif line.startswith("<>"):
+                if is_in_html_block is True:
+                    is_in_html_block = False
+                else:
+                    is_in_html_block = True
+            # List element
+            elif line.startswith("* "):
+                # If not in a list already, put us in list mode
+                if is_in_list is False:
+                    html += "<ul>"
+                    is_in_list = True
                 html += parse(line)
-                # We exit list mode
-                is_in_list = False
-            elif is_in_ordered_list is True:
-                html += "</ol>"
+            elif line.startswith("*) "):
+                # If not in a list already, put us in list mode
+                if is_in_ordered_list is False:
+                    html += "<ol>"
+                    is_in_ordered_list = True
                 html += parse(line)
-                # We exit ordered list mode
-                is_in_ordered_list = False
             else:
-                html += parse(line)
+                # Line isn't ``` (code block) or starts with "*" (list)
+                if is_in_html_block is True:
+                    html += line
+                elif is_in_code_block is True:
+                    html += escape(line)
+                elif is_in_list is True:
+                    html += "</ul>"
+                    html += parse(line)
+                    # We exit list mode
+                    is_in_list = False
+                elif is_in_ordered_list is True:
+                    html += "</ol>"
+                    html += parse(line)
+                    # We exit ordered list mode
+                    is_in_ordered_list = False
+                else:
+                    html += parse(line)
 
-    write_index_html(html)
+        write_index_html(html)
+
+import time
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+
+class FileHandler(FileSystemEventHandler):
+    def on_modified(self, event):
+        print("Modification detected. Rebuilding post.md...")
+        build()
+        print("Done!")
+
+if __name__ == "__main__":
+    event_handler = FileHandler()
+    observer = Observer()
+    observer.schedule(event_handler, path='post.md', recursive=False)
+    observer.start()
+
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        observer.stop()
+    observer.join()
