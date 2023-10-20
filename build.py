@@ -148,7 +148,7 @@ def parse(line):
                 if len(split_line) > 2: # There is a quote after the text
                     img_quote_html = "<i>"+split_line[2]+"</i>"
 
-                html = "<div class=\"attachment-div\"><img class=\"attachment\" src=\""+url+"\""+text+"/>"+parse_inline(img_quote_html)+"</div>"
+                html = "<div class=\"attachment-div\"><img onclick=\"window.open(\'"+url+"\', \'_blank\');\" class=\"attachment\" src=\""+url+"\""+text+"/>"+parse_inline(img_quote_html)+"</div>"
             else: 
                 split_line = escaped_line.rstrip().split(" ")
                 url = split_line[1]
@@ -167,8 +167,10 @@ def parse(line):
 
             html = "<a class=\"arrow\" href=\""+url+"\">"+parse_inline(text)+"</a><br>"
         # List element
-        elif escaped_line.startswith("* ") or escaped_line.startswith("*) "):
+        elif escaped_line.startswith("* "):
             html = "<li>"+parse_inline(line[2:]).rstrip()+"</li>"
+        elif escaped_line.startswith("*) "):
+            html = "<li>"+parse_inline(line[3:]).rstrip()+"</li>"
         # Blockquote (" > ")
         elif escaped_line.startswith("&gt; ") and not escaped_line.startswith("=&gt; "):
             html = "<blockquote><p>"+parse_inline(escaped_line[4:]).rstrip()+"</p></blockquote>"
