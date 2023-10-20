@@ -1,22 +1,26 @@
-:root {
+/* light theme */
+:root,
+:root.light {
     --highlight-color: #f4ee94;
     --text-color-dark: #000000;
     --text-color: #000000;
     --text-color-lighter: #1D1D1D;
-    --fronter-background: #faface;
+    --fronter-background: #ffe;
     --background: #f9f9ea;
+    --border-background: #f7f7e6;
     --font: monospace;
     --banner-color: #000000;
     --banner-shadow-color: #101010;
 }
 
-:root.reader {
+:root.light.reader {
     --highlight-color: #000000;
     --text-color-dark: #000000;
     --text-color: #000000;
     --text-color-lighter: #000000;
     --fronter-background: #f8f8d7;
     --background: #ffffff;
+    --border-background: #ffffff;
     --banner-shadow-color: #101010;
 }
 
@@ -24,50 +28,97 @@
     --font: serif;
 }
 
-.reader .attachment {
+.light.reader .attachment {
     filter: contrast(110%);
 }
 
+/* dark theme */
+:root.dark {
+    color-scheme: dark;
+    --highlight-color: #80732a;
+    --text-color-dark: #e3e3e3;
+    --text-color: #dfe0d8;
+    --text-color-lighter: #ffffff;
+    --fronter-background: #111009;
+    --background: #0a0906;
+    --border-background: #111009;
+    --banner-shadow-color: #7a7206;
+}
+
+:root.dark.reader {
+    --highlight-color: #fff5e7;
+    --text-color-dark: #eeeeee;
+    --text-color: #ffffff;
+    --text-color-lighter: #eeeeee;
+    --fronter-background: #000000;
+    --background: #000000;
+    --border-background: #000000;
+    --banner-shadow-color: #9c9c9c;
+}
+
+.dark .fronter img,
+.dark .f-v2 .bird {
+    filter: drop-shadow(0 0 2em var(--highlight-color));
+}
+
+.dark .attachment {
+    filter: brightness(60%);
+    background-color: var(--highlight-color);
+    box-shadow: 0 0 20px 20px var(--highlight-color);
+}
+
+.dark.reader .attachment {
+    filter: brightness(100%) contrast(110%);
+}
+
+/* this loads if user browser is set to dark theme and 
+  does not have .light (this implies javascript is disabled)
+  it should not affect browsers that will load the .js
+*/
 @media (prefers-color-scheme: dark) {
-    :root {
-      color-scheme: dark;
-      --highlight-color: #b6b264;
-      --text-color-dark: #e3e3e3;
-      --text-color: #dcdcdc;
-      --text-color-lighter: #ffffff;
-      --fronter-background: #1c1c00;
-      --background: #0c0c05;
-      --banner-shadow-color: #7a7006;
-    }
-    
-    :root.reader {
-      --highlight-color: #fff5e7;
-      --text-color-dark: #eeeeee;
-      --text-color: #ffffff;
-      --text-color-lighter: #eeeeee;
-      --fronter-background: #000000;
-      --background: #000000;
-      --banner-shadow-color: #9c9c9c;
+    :root:not(.dark, .light) {
+        color-scheme: dark;
+        --highlight-color: #80732a;
+        --text-color-dark: #e3e3e3;
+        --text-color: #dfe0d8;
+        --text-color-lighter: #ffffff;
+        --fronter-background: #111009;
+        --background: #0a0906;
+        --border-background: #111009;
+        --banner-shadow-color: #7a7206;
     }
 
-    .fronter img {
+    :root.reader:not(.dark, .light) {
+        --highlight-color: #fff5e7;
+        --text-color-dark: #eeeeee;
+        --text-color: #ffffff;
+        --text-color-lighter: #eeeeee;
+        --fronter-background: #000000;
+        --background: #000000;
+        --border-background: #000000;
+        --banner-shadow-color: #9c9c9c;
+    }
+
+    .fronter img :not(.dark, .light),
+    .f-v2 .bird :not(.dark, .light) {
         filter: drop-shadow(0 0 2em var(--highlight-color));
     }
 
-    .attachment {
+    .attachment :not(.dark, .light) {
         filter: brightness(60%);
         background-color: var(--highlight-color);
         box-shadow: 0 0 20px 20px var(--highlight-color);
     }
-    
-    .reader .attachment {
+
+    .reader .attachment :not(.dark, .light) {
         filter: brightness(100%) contrast(110%);
     }
 }
 
 :root {
-    border: 5vw solid var(--fronter-background);
-    border-left: 10vw solid var(--fronter-background);
+    border: 5vw solid;
+    border-left: 10vw solid;
+    border-color: var(--border-background);
     position: relative;
     top: 0;
     right: 0;
@@ -83,13 +134,15 @@ body {
     text-rendering: optimizeLegibility;
     overflow-wrap: break-word;
     word-wrap: break-word;
-    line-height: 1.6;
-    max-width: 85vw;
+    line-height: 1.4;
+    max-width: 800px;
+    width: 60vw;
     color: var(--text-color);
     background-color: var(--background);
+    border: 5px dotted var(--fronter-background);
 
     margin: 2rem auto;
-    padding: 4rem;
+    padding: 2rem;
 }
 
 .serif body {
@@ -100,14 +153,10 @@ h1,
 h2,
 h3,
 ul,
-ol,
 li,
 p,
 blockquote,
-pre,
-a {
-    font-family: inherit;
-    font-size: inherit;
+pre {
     margin: 0;
 }
 
@@ -138,38 +187,64 @@ h3:before {
 h1 {
     font-size: 1.8rem;
     font-weight: bold;
+    text-align: right;
 }
 
 h2 {
     font-size: 1.5rem;
+    margin-bottom: -1ch;
 }
 
 h3 {
     font-size: 1.25rem;
+    margin-bottom: -2ch;
 }
 
 ul {
     list-style: none;
+}
+
+ul {
     padding-top: 0.5ch;
     padding-bottom: 0.5ch;
     padding-left: 0;
 }
 
+ol {
+    padding-left: 4rem;
+}
+
 ul li {
     position: relative;
-    padding: 0;
+    padding: 4px;
     padding-left: 3ch;
 }
 
 ul li:before {
-    content: '-';
+    content: 'x';
     font-weight: bold;
     color: var(--highlight-color);
     left: 1ch;
     position: absolute;
 }
 
-main a:hover.arrow {
+a {
+    text-decoration: underline;
+    color: inherit;
+}
+
+main a.arrow {
+    margin-left: 2ch;
+}
+
+main a.arrow:before {
+    content: "~>";
+    left: -1ch;
+    position: relative;
+    display: inline-block;
+}
+
+main a.arrow:hover {
     background-color: var(--highlight-color);
     color: var(--text-color-dark);
     padding: 2px;
@@ -189,24 +264,6 @@ main a:hover.arrow {
 
 .reader main a.arrow:hover {
     padding: 0px 4px 0px 1.5ch;
-}
-
-a {
-    text-decoration: underline;
-    color: inherit;
-    display: inline-block;
-}
-
-main a.arrow {
-    margin-bottom: 1rem;
-    margin-left: 2ch;
-}
-
-main a.arrow:before {
-    content: "~>";
-    left: -1ch;
-    position: relative;
-    display: inline-block;
 }
 
 pre {
@@ -253,7 +310,7 @@ footer * {
 }
 
 summary {
-    filter: drop-shadow(0 0 1em var(--highlight-color));
+    filter: drop-shadow(0 0.1em 1em var(--highlight-color));
 }
 
 details>summary {
@@ -266,23 +323,6 @@ details>summary {
 
 details[open]>div {
     padding: 8px;
-}
-
-.fronter {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: nowrap;
-    align-items: center;
-    flex-direction: row;
-    border: 4px dotted var(--highlight-color);
-    padding: 4px;
-}
-
-.fronter img {
-    max-width: 100px;
-    max-height: 100px;
-    padding: 6px;
-    padding-left: 10px;
 }
 
 @keyframes rotate-bird {
@@ -299,15 +339,78 @@ details[open]>div {
     }
 }
 
-.fronter img:hover {
-    animation: 1s ease-in-out infinite rotate-bird;
+/*
+    FRONTER V2
+*/
+
+.f-v2 {
+    padding: 8px;
+    border: 4px dotted var(--highlight-color);
+    min-height: 100px;
+    background: var(--fronter-background);
 }
 
-.fronter p {
-    margin: 8px 0px 8px 0px;
-    padding: 8px;
-    flex-grow: 1;
+.f-v2 p {
+    text-align: justify;
+    padding: inherit;
 }
+
+.bird {
+    padding: 6px;
+    max-width: 110px;
+    max-height: 90px;
+    width: 20%;
+    min-height: 50px;
+    height: auto;
+    float: left;
+}
+
+.bird:hover {
+    filter: drop-shadow(0 0 1em var(--highlight-color));
+    animation: 0.8s ease-in-out infinite rotate-bird;
+}
+
+.bird.neutral {
+    width: 18%;
+    padding: 10px;
+    content: url(../bird_neutral.svg);
+}
+
+.bird.ascended {
+    content: url(../bird_ASCENDED.svg);
+}
+
+.bird.oops {
+    content: url(../bird_embarrassed.svg);
+}
+
+.bird.happy {
+    padding: 10px;
+    content: url(../bird_happyig.svg);
+}
+
+.bird.talking {
+    content: url(../bird_open_mouth.svg);
+}
+
+.bird.pissed {
+    content: url(../bird_pissed_off.svg);
+}
+
+.bird.questioning {
+    margin-top: -10px;
+    padding-bottom: 10px;
+    content: url(../bird_questioning.svg);
+}
+
+.bird.wait {
+    padding-top: 10px;
+    content: url(../bird_wait_a_minute.svg);
+}
+
+/*
+    / END FRONTER V2
+*/
 
 .banner {
     box-shadow: 0 0 4em var(--banner-shadow-color);
@@ -339,22 +442,31 @@ details[open]>div {
     height: calc(5vw - 20px);
     font-size: clamp(18px, calc(5vw - 38px), 28px);
     justify-content: center;
+    content: '';
 }
 
-.reader .reader-button:after {
-    content: "â—”"
+.dark .dark-button:before {
+    content: "◯";
 }
 
-.reader-button:after {
-    content: "â—•"
+.dark-button:before {
+    content: "☀";
 }
 
-.serif .serif-button:after {
+.reader .reader-button:before {
+    content: "◔";
+}
+
+.reader-button:before {
+    content: "◕";
+}
+
+.serif .serif-button:before {
     font-family: serif;
 }
 
-.serif-button:after {
-    content: "T"
+.serif-button:before {
+    content: "T";
 }
 
 .banner-button:hover {
@@ -380,18 +492,17 @@ details[open]>div {
     background-color: var(--fronter-background);
 }
 
-.attachment-div iframe {
-    aspect-ratio: 16 / 9;
-    flex-grow: 1;
-    width: 80%;
-    max-width: 700px;
-}
-
 .attachment {
     max-width: 70%;
     max-height: inherit;
     height: auto;
     object-fit: contain;
+    transition: filter 0.15s ease-out, max-width 0.2s ease-out;
+}
+
+.attachment:hover {
+    max-width: 90%;
+    filter: brightness(100%) contrast(105%);
 }
 
 picture img {
@@ -513,6 +624,8 @@ div.attachment img {
     body {
         font-size: 1.1rem;
         padding: 2rem;
+        max-width: 95vw;
+        width: auto;
     }
 
     .fronter {
