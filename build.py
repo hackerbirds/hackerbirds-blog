@@ -136,7 +136,7 @@ def parse(line):
             html = "<h3 id=\""+text.replace(" ", "-")+"\">"+parse_inline(text)+"</h3>"
         elif escaped_line.startswith("% "):
             text = escaped_line.rstrip()[2:]
-            html = "<div class=\"fronter\"><img src=\"../assets/bird_open_mouth.svg\" alt=\"\"/><p>"+parse_inline(text)+"</p></div>"
+            html = "<div class=\"f-v2\"><div class=\"bird neutral\"></div><p>"+parse_inline(text)+"</p></div>"
         elif escaped_line.startswith("-&gt; "):
             if " | " in escaped_line:
                 split_line = escaped_line.rstrip().split(" | ")
