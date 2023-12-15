@@ -5,9 +5,9 @@
     --text-color-dark: #000000;
     --text-color: #000000;
     --text-color-lighter: #1D1D1D;
-    --fronter-background: #ffe;
-    --background: #f9f9ea;
-    --border-background: #f7f7e6;
+    --fronter-background: #ffffee;
+    --background: #fcfcf2;
+    --border-background: #fdfde8;
     --font: monospace;
     --banner-color: #000000;
     --banner-shadow-color: #101010;
@@ -35,13 +35,13 @@
 /* dark theme */
 :root.dark {
     color-scheme: dark;
-    --highlight-color: #80732a;
+    --highlight-color: #6f631f;
     --text-color-dark: #e3e3e3;
     --text-color: #dfe0d8;
     --text-color-lighter: #ffffff;
     --fronter-background: #111009;
     --background: #0a0906;
-    --border-background: #111009;
+    --border-background: #1c1a0d;
     --banner-shadow-color: #7a7206;
 }
 
@@ -75,8 +75,8 @@
   does not have .light (this implies javascript is disabled)
   it should not affect browsers that will load the .js
 */
-@media (prefers-color-scheme: dark) {
-    :root:not(.dark, .light) {
+@media (prefers-color-scheme: dark) and (not all and (.dark)) {
+    :root {
         color-scheme: dark;
         --highlight-color: #80732a;
         --text-color-dark: #e3e3e3;
@@ -88,7 +88,7 @@
         --banner-shadow-color: #7a7206;
     }
 
-    :root.reader:not(.dark, .light) {
+    :root.reader {
         --highlight-color: #fff5e7;
         --text-color-dark: #eeeeee;
         --text-color: #ffffff;
@@ -99,26 +99,26 @@
         --banner-shadow-color: #9c9c9c;
     }
 
-    .fronter img :not(.dark, .light),
-    .f-v2 .bird :not(.dark, .light) {
+    .fronter img,
+    .f-v2 .bird {
         filter: drop-shadow(0 0 2em var(--highlight-color));
     }
 
-    .attachment :not(.dark, .light) {
+    .attachment {
         filter: brightness(60%);
         background-color: var(--highlight-color);
         box-shadow: 0 0 20px 20px var(--highlight-color);
     }
 
-    .reader .attachment :not(.dark, .light) {
+    .reader .attachment {
         filter: brightness(100%) contrast(110%);
     }
 }
 
 :root {
-    border: 5vw solid;
-    border-left: 10vw solid;
-    border-color: var(--border-background);
+    margin: 5vw;
+    margin-left: 10vw;
+    background: var(--border-background);
     position: relative;
     top: 0;
     right: 0;
@@ -139,10 +139,11 @@ body {
     width: 60vw;
     color: var(--text-color);
     background-color: var(--background);
-    border: 5px dotted var(--fronter-background);
+    border: 4px double var(--fronter-background);
+    box-shadow: 0 0 10px 10px var(--fronter-background);
 
     margin: 2rem auto;
-    padding: 2rem;
+    padding: 2rem 3.5rem 2rem 3.5rem;
 }
 
 .serif body {
@@ -446,19 +447,19 @@ details[open]>div {
 }
 
 .dark .dark-button:before {
-    content: "◯";
+    content: "â—¯";
 }
 
 .dark-button:before {
-    content: "☀";
+    content: "â˜€";
 }
 
 .reader .reader-button:before {
-    content: "◔";
+    content: "â—”";
 }
 
 .reader-button:before {
-    content: "◕";
+    content: "â—•";
 }
 
 .serif .serif-button:before {
@@ -616,8 +617,7 @@ div.attachment img {
 /* mobile friendly interface */
 @media screen and (max-width: 700px) {
     :root {
-        border-left: 5vw solid var(--fronter-background);
-        border: 0vw;
+        margin: 0vw;
         margin-top: 30px;
     }
 
