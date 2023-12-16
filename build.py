@@ -118,10 +118,13 @@ def parse(line):
     else:
         # Headers: id is used to scroll
         if escaped_line.startswith("# "):
+            text = escaped_line.rstrip()[2:]
             html = "<h1>"+parse_inline(text)+"</h1>"
         elif escaped_line.startswith("## "):
+            text = escaped_line.rstrip()[3:]
             html = "<h2>"+parse_inline(text)+"</h2>"
         elif escaped_line.startswith("### "):
+            text = escaped_line.rstrip()[4:]
             html = "<h3>"+parse_inline(text)+"</h3>"
         elif escaped_line.startswith("% "):
             text = escaped_line.rstrip()[2:]
