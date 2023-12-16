@@ -1,5 +1,11 @@
 from html import escape
 from datetime import datetime
+import sys
+import time
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+from bs4 import BeautifulSoup as bs
+from pathlib import Path
 
 # To manually change
 RECOMMENDED_BLOG_POST_URL = ""
@@ -15,21 +21,7 @@ footer_html = """<br><br></main>
     <a href="#">scroll up</a> &emsp; <a href="../">homepage</a> &emsp; <a href="""+RECOMMENDED_BLOG_POST_URL+""">check out our previous blog post</a>
 </footer>
 </body>
-</html>"""
-
-def write_index_html(post):
-    # Erases contents of index.html
-    open("result/index.html", "w").close()
-    with open("result/index.html", "a") as index_html:
-        # Write header.html to index.html
-        with open("header.html", "r") as header_html:
-            index_html.write(header_html.read())
-
-        # Write post contents
-        index_html.write(post)
-
-        # Write footer
-        index_html.write(footer_html)   
+</html>""" 
 
 def parse_inline(escaped_line):
     # This is for inline code blocks
@@ -126,14 +118,11 @@ def parse(line):
     else:
         # Headers: id is used to scroll
         if escaped_line.startswith("# "):
-            text = escaped_line.rstrip()[2:]
-            html = "<h1 id=\""+text.replace(" ", "-")+"\">"+parse_inline(text)+"</h1>"
+            html = "<h1>"+parse_inline(text)+"</h1>"
         elif escaped_line.startswith("## "):
-            text = escaped_line.rstrip()[3:]
-            html = "<h2 id=\""+text.replace(" ", "-")+"\">"+parse_inline(text)+"</h2>"
+            html = "<h2>"+parse_inline(text)+"</h2>"
         elif escaped_line.startswith("### "):
-            text = escaped_line.rstrip()[4:]
-            html = "<h3 id=\""+text.replace(" ", "-")+"\">"+parse_inline(text)+"</h3>"
+            html = "<h3>"+parse_inline(text)+"</h3>"
         elif escaped_line.startswith("% "):
             text = escaped_line.rstrip()[2:]
             html = "<div class=\"f-v2\"><div class=\"bird neutral\"></div><p>"+parse_inline(text)+"</p></div>"
@@ -183,8 +172,22 @@ def parse(line):
             html = html.replace("\\tick", "`")
     return html
 
-def build():
-    with open("post.md", "r") as f:
+def write_index_html(post, output_path):
+    # Erases contents of index.html
+    open(output_path, "w").close()
+    with open(output_path, "a") as index_html:
+        # Write header.html to index.html
+        with open("header.html", "r") as header_html:
+            index_html.write(header_html.read())
+
+        # Write post contents
+        index_html.write(post)
+
+        # Write footer
+        index_html.write(footer_html)  
+
+def build(post_name):
+    with open("posts/"+post_name+".md", "r") as f:
         html = ""
         is_in_code_block = False
         is_in_html_block = False
@@ -239,11 +242,7 @@ def build():
                 else:
                     html += parse(line)
 
-        write_index_html(html)
-
-import time
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
+        return html
 
 class FileHandler(FileSystemEventHandler):
     def on_modified(self, event):
@@ -252,12 +251,27 @@ class FileHandler(FileSystemEventHandler):
         print("Done!")
 
 if __name__ == "__main__":
+    POST_NAME = sys.argv[1]
+
+    print("Compiling post \""+POST_NAME+"\"")
+
+    # Create folders if they don't exist already
+    Path("posts/").mkdir(parents=True, exist_ok=True)
+    Path("results/"+POST_NAME).mkdir(parents=True, exist_ok=True)
+
     print("Building post.md...")
-    build()
-    print("Done!")
+    ugly_html = build(POST_NAME)
+
+    # prettify html
+    # stolen from https://stackoverflow.com/questions/6150108/how-to-pretty-print-html-to-a-file-with-indentation
+    html = bs(ugly_html, 'html.parser').prettify()
+
+    write_index_html(html, "results/"+POST_NAME+"/index.html")
+
+    print("Done! Now observing changes...")
     event_handler = FileHandler()
     observer = Observer()
-    observer.schedule(event_handler, path='post.md', recursive=False)
+    observer.schedule(event_handler, path='posts/'+POST_NAME+'.md', recursive=False)
     observer.start()
 
     try:

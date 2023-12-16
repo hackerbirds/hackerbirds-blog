@@ -4,15 +4,15 @@ Write blog posts quickly using this little script. Originally based on [Lichen](
 
 ## Installation and usage
 
-Our python script uses the `watchdog` library to detect file changes and automatically rebuild the HTML page. To instlal `watchdog`, run `python3 -m pip install watchdog`.
+On debian you can install the necessary Python dependencies (`watchdog` and `BeautifulSoup4`) with the `./install.sh` bash script.
 
-Everything else should "just work" with `python3 build.py`.
+To write a post named `example-post`, make a file `posts/example-post.md`, write your stuff in there, then call `python3 build.py example-post`. The script is build to stay active and automatically recompile whenever it detects a change inside `posts/example-post.md`.
 
 ## Features
 
 Below are examples for each of the features. 
 
-### You may also check at `post.md` and the resulting html file in `result/index.html` to see how it looks in practice.
+### You may also check at `posts/test.md` and the resulting html file in `results/test/index.html` to see how it looks in practice.
 
 #### Inline text formatting
 * Bold text: `Wrap the text with a star (*). Example: *this text will be bold*`

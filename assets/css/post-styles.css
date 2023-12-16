@@ -447,19 +447,19 @@ details[open]>div {
 }
 
 .dark .dark-button:before {
-    content: "â—¯";
+    content: "◯";
 }
 
 .dark-button:before {
-    content: "â˜€";
+    content: "☀";
 }
 
 .reader .reader-button:before {
-    content: "â—”";
+    content: "◔";
 }
 
 .reader-button:before {
-    content: "â—•";
+    content: "◕";
 }
 
 .serif .serif-button:before {
