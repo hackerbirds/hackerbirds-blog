@@ -129,7 +129,7 @@ def parse(line):
         elif escaped_line.startswith("% "):
             text = escaped_line.rstrip()[2:]
             html = "<div class=\"f-v2\"><div class=\"bird neutral\"></div><p>"+parse_inline(text)+"</p></div>"
-        elif escaped_line.startswith("-&gt; "):
+        elif escaped_line.startswith("-&gt; ") or escaped_line.startswith("-> "):
             if " | " in escaped_line:
                 split_line = escaped_line.rstrip().split(" | ")
                 url = ' '.join(split_line[0].split(' ')[1:])
@@ -150,7 +150,7 @@ def parse(line):
 
                 html = "<img class=\"attachment\" src=\""+url+"\" alt=\""+parse_inline(text)+"\"/>"
         # Link/URL (" => ")
-        elif escaped_line.startswith("=&gt; "):
+        elif escaped_line.startswith("=&gt; ") or escaped_line.startswith("=> "):
             split_line = escaped_line.rstrip().split(" ")
             url = split_line[1]
             text = url
@@ -164,7 +164,7 @@ def parse(line):
         elif escaped_line.startswith("*) "):
             html = "<li>"+parse_inline(line[3:]).rstrip()+"</li>"
         # Blockquote (" > ")
-        elif escaped_line.startswith("&gt; ") and not escaped_line.startswith("=&gt; "):
+        elif (escaped_line.startswith("&gt; ") and not escaped_line.startswith("=&gt; ")) or (escaped_line.startswith("> ") and not escaped_line.startswith("=> ")):
             html = "<blockquote><p>"+parse_inline(escaped_line[4:]).rstrip()+"</p></blockquote>"
         # Bar line
         elif escaped_line == "---\n":
