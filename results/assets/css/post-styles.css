@@ -268,6 +268,7 @@ main a.arrow:hover {
 }
 
 pre {
+    margin: 0px 30px 0px 30px;
     padding: 1ch;
     background-color: var(--fronter-background);
     color: var(--text-color-lighter);
