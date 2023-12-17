@@ -4,7 +4,7 @@ Write blog posts quickly using this little script. Originally based on [Lichen](
 
 ## Installation and usage
 
-On debian you can install the necessary Python dependencies (`watchdog` and `BeautifulSoup4`) with the `./install.sh` bash script.
+On debian you can install the necessary Python dependencies (`watchdog`) with the `./install.sh` bash script.
 
 To write a post named `example-post`, make a file `posts/example-post.md`, write your stuff in there, then call `python3 build.py example-post`. The script is build to stay active and automatically recompile whenever it detects a change inside `posts/example-post.md`.
 
