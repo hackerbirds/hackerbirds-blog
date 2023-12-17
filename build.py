@@ -4,7 +4,7 @@ import sys
 import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
-from bs4 import BeautifulSoup as bs
+from lxml import etree, html
 from pathlib import Path
 
 # To manually change
@@ -247,15 +247,15 @@ def build(post_name):
 
         return html
 
-
 def compile(post_name):
     ugly_html = build(POST_NAME)
 
     # prettify html
     # stolen from https://stackoverflow.com/questions/6150108/how-to-pretty-print-html-to-a-file-with-indentation
-    html = bs(ugly_html, 'html.parser').prettify()
+    document_root = html.fromstring(ugly_html)
+    post_html = etree.tostring(document_root, encoding='unicode', pretty_print=True)
 
-    write_index_html(html, "results/"+POST_NAME+"/index.html")
+    write_index_html(post_html, "results/"+POST_NAME+"/index.html")
 
 global POST_NAME 
 
