@@ -247,22 +247,8 @@ def build(post_name):
 
         return html
 
-class FileHandler(FileSystemEventHandler):
-    def on_modified(self, event):
-        print("Modification detected. Rebuilding post.md...")
-        build()
-        print("Done!")
 
-if __name__ == "__main__":
-    POST_NAME = sys.argv[1]
-
-    print("Compiling post \""+POST_NAME+"\"")
-
-    # Create folders if they don't exist already
-    Path("posts/").mkdir(parents=True, exist_ok=True)
-    Path("results/"+POST_NAME).mkdir(parents=True, exist_ok=True)
-
-    print("Building post.md...")
+def compile(post_name):
     ugly_html = build(POST_NAME)
 
     # prettify html
@@ -271,6 +257,24 @@ if __name__ == "__main__":
 
     write_index_html(html, "results/"+POST_NAME+"/index.html")
 
+global POST_NAME 
+
+class FileHandler(FileSystemEventHandler):
+    def on_modified(self, event):
+        print("Modification detected. Rebuilding post.md...")
+        compile(POST_NAME)
+        print("Done!")
+
+if __name__ == "__main__":
+    POST_NAME = sys.argv[1]
+    print("Compiling post \""+POST_NAME+"\"")
+
+    # Create folders if they don't exist already
+    Path("posts/").mkdir(parents=True, exist_ok=True)
+    Path("results/"+POST_NAME).mkdir(parents=True, exist_ok=True)
+
+    compile(POST_NAME)
+    
     print("Done! Now observing changes...")
     event_handler = FileHandler()
     observer = Observer()
