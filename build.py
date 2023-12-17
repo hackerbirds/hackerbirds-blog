@@ -247,33 +247,29 @@ def build(post_name):
 
         return html
 
-def compile(post_name):
+
+POST_NAME = sys.argv[1]
+
+def compile():
     ugly_html = build(POST_NAME)
 
-    # prettify html
-    # stolen from https://stackoverflow.com/questions/6150108/how-to-pretty-print-html-to-a-file-with-indentation
-    document_root = html.fromstring(ugly_html)
-    post_html = etree.tostring(document_root, encoding='unicode', pretty_print=True)
+    write_index_html(ugly_html, "results/"+POST_NAME+"/index.html")
 
-    write_index_html(post_html, "results/"+POST_NAME+"/index.html")
-
-global POST_NAME 
 
 class FileHandler(FileSystemEventHandler):
     def on_modified(self, event):
         print("Modification detected. Rebuilding post.md...")
-        compile(POST_NAME)
+        compile()
         print("Done!")
 
 if __name__ == "__main__":
-    POST_NAME = sys.argv[1]
     print("Compiling post \""+POST_NAME+"\"")
 
     # Create folders if they don't exist already
     Path("posts/").mkdir(parents=True, exist_ok=True)
     Path("results/"+POST_NAME).mkdir(parents=True, exist_ok=True)
 
-    compile(POST_NAME)
+    compile()
     
     print("Done! Now observing changes...")
     event_handler = FileHandler()
