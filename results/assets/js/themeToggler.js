@@ -30,6 +30,10 @@ function loadTheme() {
 	});
 }
 
+function speechBubble(text) {
+	document.body.insertAdjacentHTML("beforeend", "<span class=\"talker\" id=\"talker\" onclick=\"document.getElementById('talker').classList.toggle('hidden');\">" + text + "</span>");
+}
+
 function toggleTheme() {
 	if (localStorage.getItem('dark-theme') === "dark") {
 		document.documentElement.classList.remove("dark")

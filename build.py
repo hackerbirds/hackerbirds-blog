@@ -4,7 +4,6 @@ import sys
 import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
-from lxml import etree, html
 from pathlib import Path
 
 # To manually change
