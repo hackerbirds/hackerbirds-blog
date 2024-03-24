@@ -31,7 +31,12 @@ function loadTheme() {
 }
 
 function speechBubble(text) {
-	document.body.insertAdjacentHTML("beforeend", "<span class=\"talker\" id=\"talker\" onclick=\"document.getElementById('talker').classList.toggle('hidden');\">" + text + "</span>");
+	speechId = 'speech-' + window.location.pathname
+	if (localStorage.getItem(speechId) !== "clicked") {
+		console.log("Bubbling the speech")
+		document.body.insertAdjacentHTML("beforeend", "<span class=\"talker\" id=\"talker\" onclick=\"document.getElementById('talker').classList.toggle('hidden');\">" + text + "</span>")
+		localStorage.setItem(speechId, "clicked")
+	}
 }
 
 function toggleTheme() {
