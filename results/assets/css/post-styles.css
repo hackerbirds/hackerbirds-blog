@@ -273,6 +273,10 @@ main a.arrow:hover {
     text-decoration: none;
 }
 
+a.link:hover code {
+    color: var(--text-color);
+}
+
 .reader main a:hover {
     background-color: var(--background);
     border: 2px dashed var(--text-color);
