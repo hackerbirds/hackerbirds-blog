@@ -4,13 +4,6 @@
         url("../fonts/IntelOneMono-Regular.otf") format("otf");
 }
 
-@font-face {
-    font-family: "Pally";
-    src: url("../fonts/Pally-Variable.woff2") format("woff2"),
-        url("../fonts/Pally-Variable.woff") format("woff"),
-        url("../fonts/Pally-Variable.ttf") format("ttf");
-}
-
 /* light theme */
 :root,
 :root.light {
@@ -39,7 +32,7 @@
 }
 
 :root.serif {
-    --font: "Pally", serif;
+    --font: sans-serif;
 }
 
 .light.reader .attachment {
