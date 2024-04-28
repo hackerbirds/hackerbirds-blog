@@ -306,6 +306,18 @@ code {
     background-color: var(--fronter-background);
 }
 
+div.highlight > pre {
+    margin: 0;
+    font-size: smaller;
+    color: #ffffff;
+    background-color: #222222;
+}
+
+.dark div.highlight > pre {
+    background-color: #111111;
+    filter: brightness(0.9);
+}
+
 blockquote {
     padding: 0.25rem;
     background-color: var(--fronter-background);

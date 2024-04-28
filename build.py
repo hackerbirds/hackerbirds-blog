@@ -5,6 +5,9 @@ import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from pathlib import Path
+from pygments import highlight
+from pygments.lexers import RustLexer
+from pygments.formatters import HtmlFormatter
 
 # To manually change
 RECOMMENDED_BLOG_POST_URL = ""
@@ -191,10 +194,13 @@ def write_index_html(post, output_path):
 def build(post_name):
     with open("posts/"+post_name+".md", "r") as f:
         html = ""
+        is_in_rust_code_block = False
         is_in_code_block = False
         is_in_html_block = False
         is_in_list = False
         is_in_ordered_list = False
+        code_block = ""
+        html += "<style>"+HtmlFormatter(style="lightbulb").get_style_defs('.highlight')+"</style>"
         for line in f:
             # Beginning OR end of a code block
             if line == "```\n":
@@ -202,10 +208,18 @@ def build(post_name):
                     is_in_code_block = False
                     # Close code bock
                     html += "</pre>"
+                elif is_in_rust_code_block is True:
+                    # Write code block
+                    html += highlight(code_block, RustLexer(), HtmlFormatter())
+                    code_block = ""
+                    is_in_rust_code_block = False
                 else:
                     is_in_code_block = True
                     # Open code block
                     html += "<pre aria-label=\"\">"
+            elif line == "```rust\n":
+                if is_in_rust_code_block is not True:
+                    is_in_rust_code_block = True
             # Beginning OR end of an HTML block
             elif line.startswith("<>"):
                 if is_in_html_block is True:
@@ -231,6 +245,8 @@ def build(post_name):
                     html += line
                 elif is_in_code_block is True:
                     html += escape(line)
+                elif is_in_rust_code_block is True:
+                    code_block += line
                 elif is_in_list is True:
                     html += "</ul>"
                     html += parse(line)
