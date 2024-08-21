@@ -5,22 +5,9 @@ import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from pathlib import Path
-from pygments import highlight
-from pygments.lexers import RustLexer
-from pygments.formatters import HtmlFormatter
 
 # To manually change
 RECOMMENDED_BLOG_POST_URL = ""
-
-def has_arg_flag(flag):
-    for i in range(len(sys.argv)):
-        if (sys.argv[i] == flag):
-            return True
-    return False
-
-POST_NAME = sys.argv[1]
-HAS_CODE_BLOCK = has_arg_flag("--code-block")
-HAS_KATEX = has_arg_flag("--katex")
 
 # All our blog posts end like this. The date is the building date
 def the_hackerbirds_love_you():
@@ -193,16 +180,7 @@ def write_index_html(post, output_path):
     with open(output_path, "a") as index_html:
         # Write header.html to index.html
         with open("header.html", "r") as header_html:
-            if HAS_KATEX:
-                header_html = header_html.read()
-                i = header_html.find('</script>\n') + 10
-                index_html.write(header_html[:i] + """
-                <link rel="stylesheet" href="../assets/katex/katex.min.css">
-                <script defer src="../assets/katex/katex.min.js"></script>
-                <script defer src="../assets/katex/contrib/auto-render.min.js"></script>
-                """ + header_html[i:])
-            else:
-                index_html.write(header_html.read())
+            index_html.write(header_html.read())
 
         # Write post contents
         index_html.write(post)
@@ -211,17 +189,12 @@ def write_index_html(post, output_path):
         index_html.write(footer_html)  
 
 def build(post_name):
-    global HAS_CODE_BLOCK
     with open("posts/"+post_name+".md", "r") as f:
         html = ""
-        is_in_rust_code_block = False
         is_in_code_block = False
         is_in_html_block = False
         is_in_list = False
         is_in_ordered_list = False
-        code_block = ""
-        if HAS_CODE_BLOCK or is_in_rust_code_block:
-            html += "<style>"+HtmlFormatter(style="lightbulb").get_style_defs('.highlight')+"</style>"
         for line in f:
             # Beginning OR end of a code block
             if line == "```\n":
@@ -229,18 +202,10 @@ def build(post_name):
                     is_in_code_block = False
                     # Close code bock
                     html += "</pre>"
-                elif is_in_rust_code_block is True:
-                    # Write code block
-                    html += highlight(code_block, RustLexer(), HtmlFormatter())
-                    code_block = ""
-                    is_in_rust_code_block = False
                 else:
                     is_in_code_block = True
                     # Open code block
                     html += "<pre aria-label=\"\">"
-            elif HAS_CODE_BLOCK and line == "```rust\n":
-                if is_in_rust_code_block is not True:
-                    is_in_rust_code_block = True
             # Beginning OR end of an HTML block
             elif line.startswith("<>"):
                 if is_in_html_block is True:
@@ -266,8 +231,6 @@ def build(post_name):
                     html += line
                 elif is_in_code_block is True:
                     html += escape(line)
-                elif is_in_rust_code_block is True:
-                    code_block += line
                 elif is_in_list is True:
                     html += "</ul>"
                     html += parse(line)
@@ -283,6 +246,9 @@ def build(post_name):
 
         return html
 
+
+POST_NAME = sys.argv[1]
+
 def compile():
     ugly_html = build(POST_NAME)
 
@@ -297,8 +263,6 @@ class FileHandler(FileSystemEventHandler):
 
 if __name__ == "__main__":
     print("Compiling post \""+POST_NAME+"\"")
-    print("Compiling with Katex:", HAS_KATEX)
-    print("Compiling with formatted code blocks:", HAS_CODE_BLOCK)
 
     # Create folders if they don't exist already
     Path("posts/").mkdir(parents=True, exist_ok=True)
