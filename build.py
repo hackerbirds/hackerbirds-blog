@@ -200,6 +200,19 @@ def write_index_html(post, output_path):
                 <link rel="stylesheet" href="../assets/katex/katex.min.css">
                 <script defer src="../assets/katex/katex.min.js"></script>
                 <script defer src="../assets/katex/contrib/auto-render.min.js"></script>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        renderMathInElement(document.body, {
+                            delimiters: [
+                                { left: '$$', right: '$$', display: true },
+                                { left: '$', right: '$', display: false },
+                                { left: '\\(', right: '\\)', display: false },
+                                { left: '\\[', right: '\\]', display: true }
+                            ],
+                            throwOnError: false
+                        });
+                    });
+                </script>
                 """ + header_html[i:])
             else:
                 index_html.write(header_html.read())
