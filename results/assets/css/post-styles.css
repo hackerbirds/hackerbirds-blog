@@ -7,13 +7,13 @@
 /* light theme */
 :root,
 :root.light {
-    --highlight-color: #d51717;
+    --highlight-color: #4f930b;
     --text-color-dark: #000000;
-    --text-color: #000000;
+    --text-color: #181010;
     --text-color-lighter: #1D1D1D;
     --highlight-text: #ffffff;
     --fronter-background: #ffffee;
-    --background: #ffffea;
+    --background: #fdfdf5;
     --border-background: #fdfde8;
     --banner-color: #000000;
     --banner-shadow-color: #101010;
@@ -127,8 +127,6 @@
 }
 
 :root {
-    margin: 5vw;
-    margin-left: 10vw;
     background: var(--border-background);
     position: relative;
     top: 0;
@@ -138,24 +136,29 @@
     overflow: auto;
     overflow-x: hidden;
 
+    --banner-height: 60px;
     --font: "Intel One Mono", monospace;
-    font-size: 20px;
+
+    font-size: 19px;
     font-family: var(--font);
     text-rendering: optimizeLegibility;
     overflow-wrap: break-word;
     word-wrap: break-word;
-    line-height: 1.3;
 }
 
 body {
-    max-width: 800px;
-    width: 60vw;
+    width: auto;
     color: var(--text-color);
     background-color: var(--background);
     border: 6px dotted var(--highlight-color);
-    margin: 2rem auto;
-    margin-bottom: 6rem;
-    padding: 2rem 3.5rem 2rem 3.5rem;
+    padding: 2rem;
+    margin: 1rem;
+    margin-top: calc(1rem + var(--banner-height));
+}
+
+main {
+    margin: auto;
+    max-width: 800px;
 }
 
 h1,
@@ -306,14 +309,14 @@ code {
     background-color: var(--fronter-background);
 }
 
-div.highlight > pre {
+div.highlight>pre {
     margin: 0;
     font-size: smaller;
     color: #ffffff;
     background-color: #222222;
 }
 
-.dark div.highlight > pre {
+.dark div.highlight>pre {
     background-color: #111111;
     filter: brightness(0.9);
 }
@@ -384,6 +387,7 @@ details[open]>div {
 
 .f-v2 {
     padding: 8px;
+    border-radius: 24px;
     border: 6px dotted var(--highlight-color);
     min-height: 100px;
     background: var(--fronter-background);
@@ -453,10 +457,10 @@ details[open]>div {
 
 .banner {
     box-shadow: 0 0 2em var(--banner-shadow-color);
-    height: 100%;
-    width: 5vw;
+    position: absolute;
+    height: var(--banner-height);
+    width: 100%;
     min-width: 48px;
-    position: fixed;
     z-index: 2;
     top: 0;
     left: 0;
@@ -465,7 +469,7 @@ details[open]>div {
     color: var(--background);
     overflow: visible;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     align-content: center;
     gap: 10px 10px;
@@ -654,14 +658,23 @@ div.attachment img {
 
 .banner-logo {
     flex-grow: 2;
-    margin-top: 2vh;
     margin-left: 6vw;
     transition: margin-left 0.4s;
     max-width: 9vw;
     z-index: 3;
     animation: 12s ease-in 3s infinite alternate-reverse blinking-bird;
+
+    transform: rotate(50deg);
+    margin-top: 55px;
+    max-width: 100px;
+    height: 80px;
 }
 
+.banner > b {
+    color: var(--text-color);
+}
+
+/* desktop only css */
 /* this hover animation is disabled in the mobile layout */
 @media screen and (min-width: 701px) {
     .banner:hover {
@@ -691,12 +704,8 @@ div.attachment img {
     }
 
     body {
-        font-size: 1.1rem;
         border: 0;
-        padding: 5vw;
-        padding-top: 40px;
-        max-width: 95vw;
-        width: auto;
+        padding: 0;
     }
 
     .fronter {
@@ -724,18 +733,19 @@ div.attachment img {
         width: 100%;
         flex-direction: row;
     }
+    
+    .banner > b {
+        display: none;
+    }
+
+    .banner-logo {
+        height: 50px;
+    }
 
     .banner-button {
         width: 40px;
         height: 40px;
         font-size: 24px;
-    }
-
-    .banner-logo {
-        transform: rotate(50deg);
-        margin-top: 55px;
-        max-width: 100px;
-        height: 50px;
     }
 
     .attachment {
